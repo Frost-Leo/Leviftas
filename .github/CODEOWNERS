@@ -1,0 +1,17 @@
+# CODEOWNERS
+# Copyright © 2025 Leviftas project authors. All rights reserved.
+#
+# This file is part of the Leviftas project SDK.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+# For the full license text, see <https://www.gnu.org/licenses/gpl-3.0.html>
+#
+# - Author    : Frost Leo <frostleo.dev@gmail.com>
+# - Created   : 2025/9/29
+# - Modified  : 2025/9/29
+#
+# This file defines code ownership for the Leviftas project.
+# All changes require review from the designated code owners.
+
+# Global owner for all files in the repository
+* @Frost-Leo
