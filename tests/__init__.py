@@ -3,7 +3,7 @@
 """
 __init__.py
 
-This module provides 
+Leviftas project test directory.
 
 Copyright © 2025 Leviftas authors. All rights reserved.
 

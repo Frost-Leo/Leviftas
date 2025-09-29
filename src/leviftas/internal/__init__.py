@@ -3,7 +3,7 @@
 """
 __init__.py
 
-A distributed, modular SDK for centralized data platform built on Django Rest Framework.
+Leviftas's internal modules.
 
 Copyright © 2025 Leviftas authors. All rights reserved.
 
@@ -15,5 +15,3 @@ For the full license text, see <https://www.gnu.org/licenses/gpl-3.0.html>
 - Created  : 2025/9/29 
 - Modified : 2025/9/29
 """
-
-__version__: str = "0.1.0"

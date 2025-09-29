@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-__init__.py
+models
 
-A distributed, modular SDK for centralized data platform built on Django Rest Framework.
+This model provides a collection of base models.
 
 Copyright © 2025 Leviftas authors. All rights reserved.
 
@@ -16,4 +16,8 @@ For the full license text, see <https://www.gnu.org/licenses/gpl-3.0.html>
 - Modified : 2025/9/29
 """
 
-__version__: str = "0.1.0"
+from leviftas.internal.models.base.internal_base_model import InternalBaseModel
+
+__all__ = [
+    "InternalBaseModel",
+]
