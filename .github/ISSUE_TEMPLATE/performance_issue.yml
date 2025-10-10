@@ -1,0 +1,174 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# performance_issue.yml
+#
+# Leviftas project performance issue template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/10
+# - Modified : 2025/10/10
+
+name: Performance Issue
+description: Report performance problems or bottlenecks in Leviftas
+title: "[Performance]: "
+labels: ["performance", "triage"]
+assignees:
+  - FrostLeo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a performance issue!
+        
+        Performance is critical for Leviftas. Please provide as much detail as possible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Performance Issue Description
+      description: Describe the performance problem you're experiencing
+      placeholder: The application becomes slow when...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of Leviftas is experiencing performance issues?
+      options:
+        - Startup/Initialization
+        - Runtime Processing
+        - Memory Usage
+        - CPU Usage
+        - I/O Operations
+        - Network Operations
+        - Database Operations
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the performance issue?
+      placeholder: |
+        1. Start Leviftas with configuration...
+        2. Load data set of size...
+        3. Perform operation...
+        4. Observe performance degradation
+    validations:
+      required: true
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Performance Metrics
+      description: |
+        Please provide any performance metrics you've collected.
+        Include timing, memory usage, CPU usage, etc.
+      placeholder: |
+        - Operation time: 5 seconds (expected: < 1 second)
+        - Memory usage: 2GB (expected: < 500MB)
+        - CPU usage: 100% on all cores
+      render: markdown
+    validations:
+      required: false
+
+  - type: input
+    id: data-size
+    attributes:
+      label: Data Size/Volume
+      description: What size of data are you working with?
+      placeholder: ex. 1GB file, 1M records, 1000 requests/sec
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide detailed environment information
+      placeholder: |
+        - OS: Ubuntu 22.04
+        - CPU: Intel i7-9700K (8 cores)
+        - RAM: 16GB
+        - Storage: SSD
+        - Leviftas Version: v1.0.0
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Configuration
+      description: |
+        Please provide relevant configuration settings.
+        This will be automatically formatted as code.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: profiling
+    attributes:
+      label: Profiling Data
+      description: |
+        If you have profiling data (flame graphs, heap dumps, etc.), please share them.
+        You can attach files by dragging and dropping into this field.
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workarounds
+      description: Have you found any workarounds for this performance issue?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Is this a regression?
+      description: Did this work better in a previous version?
+      options:
+        - "Yes (please specify version in additional context)"
+        - "No"
+        - "Not sure"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that might help diagnose the performance issue
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for similar performance issues
+          required: true
+        - label: I have provided performance metrics or profiling data
+          required: false
+        - label: I have tested with the latest version of Leviftas
+          required: false

@@ -1,0 +1,134 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# documentation.yml
+#
+# Leviftas project documentation improvement Issue template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/10
+# - Modified : 2025/10/10
+
+name: Documentation Improvement
+description: Suggest improvements to Leviftas documentation
+title: "[Docs]: "
+labels: ["documentation", "triage"]
+assignees:
+  - FrostLeo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve Leviftas documentation!
+        
+        Good documentation is crucial for project success.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs improvement?
+      options:
+        - API Reference
+        - Getting Started Guide
+        - Tutorial
+        - Configuration Guide
+        - Architecture Overview
+        - Code Examples
+        - FAQ
+        - Troubleshooting
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: If this relates to existing documentation, please provide the URL
+      placeholder: https://...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What kind of issue are you reporting?
+      multiple: true
+      options:
+        - Incorrect information
+        - Missing information
+        - Unclear explanation
+        - Broken links
+        - Code example doesn't work
+        - Typos or grammar
+        - Outdated content
+        - Missing examples
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-content
+    attributes:
+      label: Current Content
+      description: |
+        If applicable, quote or describe the current documentation content that needs improvement.
+        You can use markdown formatting.
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: Suggested Improvement
+      description: |
+        Please describe your suggested improvement.
+        Be as specific as possible - you can even provide the exact text you'd like to see.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason for Change
+      description: |
+        Why is this change needed? 
+        How will it help users better understand or use Leviftas?
+      placeholder: This change would help users because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Any other context, examples, or screenshots that support your suggestion.
+        You can drag and drop images here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have checked that this documentation issue hasn't been reported before
+          required: true
+        - label: I am willing to help write or review the documentation changes
+          required: false

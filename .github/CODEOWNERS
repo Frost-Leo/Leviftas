@@ -1,0 +1,66 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# CODEOWNERS
+#
+# Leviftas project code ownership definitions.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/10
+# - Modified : 2025/10/10
+
+# Global code owners
+* @Frost-Leo
+
+# Documentation
+/docs/ @Frost-Leo
+*.md @Frost-Leo
+
+# Configuration files
+/.github/ @Frost-Leo
+/requirements*.txt @Frost-Leo
+/setup.py @Frost-Leo
+/pyproject.toml @Frost-Leo
+/manage.py @Frost-Leo
+/settings.toml @Frost-Leo
+/dynaconf_settings.py @Frost-Leo
+
+# Source code
+/src/ @Frost-Leo
+/src/leviftas/ @Frost-Leo
+
+# Django specific (in src layout)
+/src/leviftas/*/models.py @Frost-Leo
+/src/leviftas/*/views.py @Frost-Leo
+/src/leviftas/*/serializers.py @Frost-Leo
+/src/leviftas/*/urls.py @Frost-Leo
+/src/leviftas/*/admin.py @Frost-Leo
+
+# RBAC and permissions
+/src/leviftas/*/permissions.py @Frost-Leo
+/src/leviftas/*/rbac/ @Frost-Leo
+/src/leviftas/*/auth/ @Frost-Leo
+
+# Configuration and settings
+/src/leviftas/*/settings/ @Frost-Leo
+/src/leviftas/*/config/ @Frost-Leo
+
+# Tests
+/tests/ @Frost-Leo
+**/test_*.py @Frost-Leo
+**/*_test.py @Frost-Leo
+
+# Security-related files
+/SECURITY.md @Frost-Leo
+/.github/SECURITY.md @Frost-Leo

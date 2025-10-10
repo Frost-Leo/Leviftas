@@ -1,0 +1,128 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# question.yml
+#
+# Leviftas project question Issue template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/10
+# - Modified : 2025/10/10
+
+name: Question
+description: Ask a question about Leviftas
+title: "[Question]: "
+labels: ["question", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in Leviftas!
+        
+        Before asking, please check:
+        - 💬 [Discussions](https://github.com/Frost-Leo/Leviftas/discussions)
+        - 🔍 [Existing Issues](https://github.com/Frost-Leo/Leviftas/issues)
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: What area does your question relate to?
+      options:
+        - Installation / Setup
+        - Configuration
+        - API Usage
+        - Performance
+        - Integration
+        - Best Practices
+        - Architecture
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Please ask your question clearly and provide as much context as possible.
+      placeholder: How do I...? / Why does...? / What is the best way to...?
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-tried
+    attributes:
+      label: What I've Tried
+      description: |
+        Please describe what you've already tried or researched.
+        This helps us understand your current knowledge level and avoid suggesting things you've already attempted.
+      placeholder: |
+        - I looked at the documentation section on...
+        - I tried the following code...
+        - I searched for...
+    validations:
+      required: false
+
+  - type: textarea
+    id: code-example
+    attributes:
+      label: Code Example
+      description: |
+        If applicable, please provide a minimal code example that demonstrates your question.
+        This will be automatically formatted as code.
+      render: code
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Leviftas Version
+      description: What version of Leviftas are you using?
+      placeholder: ex. v1.0.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Please provide any relevant environment details
+      placeholder: |
+        - OS: Ubuntu 22.04
+        - Node.js: v18.0.0
+        - Package Manager: npm 9.0.0
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other information that might help us answer your question
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched the documentation
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This is not a bug report or feature request
+          required: true
