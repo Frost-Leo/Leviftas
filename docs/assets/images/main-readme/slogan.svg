@@ -1,0 +1,30 @@
+<!--
+Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+slogan.svg
+
+Project slogan graphic for Leviftas - displays the project's tagline and mission statement.
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/13
+- Modified : 2025/10/13
+-->
+
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='50' viewBox='0 0 900 50'>
+    <text x='450' y='30' font-family='Segoe Print, cursive' font-weight='bold' fill='#1d1d1f' font-size='16' text-anchor='middle'>
+        A distributed and modular SDK for centralized data platforms, built on Django REST Framework.
+    </text>
+</svg>
+

@@ -1,0 +1,201 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# .gitignore
+#
+# Git ignore file for Leviftas project - specifies intentionally untracked files to ignore.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025-10-13
+# - Modified : 2025-10-13
+
+# Abstra
+.abstra/
+
+# C extensions
+*.so
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Cython
+cython_debug/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask
+instance/
+.webassets-cache
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Log files
+logs/
+logs/*.json
+**/logs/*.json
+log/
+log/*.json
+**/log/*.json
+
+# Marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# mkdocs
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pdm
+# pdm.lock
+# pdm.toml
+.pdm-python
+.pdm-build/
+
+# PEP 582
+__pypackages__/
+
+# pipenv
+# Pipfile.lock
+
+# pixi
+# pixi.lock
+.pixi
+
+# poetry
+# poetry.lock
+# poetry.toml
+
+# PyBuilder
+.pybuilder/
+target/
+
+# PyCharm
+.idea/
+
+# pyenv
+# .python-version
+
+# PyInstaller
+*.manifest
+*.spec
+
+# PyPI
+.pypirc
+
+# Pyre
+.pyre/
+
+# Python
+__pycache__/
+*.py[codz]
+*$py.class
+
+# pytype
+.pytype/
+
+# Rope
+.ropeproject
+
+# Ruff
+.ruff_cache/
+
+# SageMath
+*.sage.py
+
+# Scrapy
+.scrapy
+
+# Sphinx
+docs/_build/
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Translations
+*.mo
+*.pot
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# UV
+# uv.lock
+
+# Visual Studio Code
+.vscode/
