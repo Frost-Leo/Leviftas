@@ -1,0 +1,313 @@
+# Copyright © 2025 LeviftasTest authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# issues-feature-discussion.yml
+#
+# Automatically creates a discussion for feature requests when requested
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/14
+# - Modified : 2025/10/14
+
+name: Create Feature Discussion
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-feature-discussion:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'feature')
+    permissions:
+      issues: write
+      discussions: write
+    steps:
+      - name: Check if discussion should be created
+        id: check-discussion
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueBody = context.payload.issue.body;
+            
+            // Extract discussion status from issue body
+            const discussionStatusMatch = issueBody.match(/### Community Discussion\s*\n\s*(.+?)(?:\n|$)/);
+            
+            if (!discussionStatusMatch) {
+              console.log('Could not find discussion status in issue body');
+              core.setOutput('should_create', 'false');
+              return;
+            }
+            
+            const discussionStatus = discussionStatusMatch[1].trim();
+            console.log(`Discussion status: ${discussionStatus}`);
+            
+            // Check if user wants auto-creation
+            if (discussionStatus.includes('I would like a discussion to be automatically created')) {
+              core.setOutput('should_create', 'true');
+              console.log('User requested automatic discussion creation');
+            } else {
+              core.setOutput('should_create', 'false');
+              console.log('User did not request automatic discussion creation');
+            }
+
+      - name: Create discussion and update issue
+        if: steps.check-discussion.outputs.should_create == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.issue;
+            const issueTitle = context.payload.issue.title;
+            const issueBody = context.payload.issue.body;
+            const issueAuthor = context.payload.issue.user.login;
+            const issueUrl = context.payload.issue.html_url;
+            
+            // Extract feature title (remove all prefixes and date)
+            let featureTitle = issueTitle
+              .replace(/^\[Feature\]:\s*/, '')  // Remove [Feature]: prefix
+              .replace(/^\d{4}-\d{2}-\d{2}\s*\|\s*/, '')  // Remove date if exists
+              .trim();
+            
+            // Extract proposal section
+            const proposalMatch = issueBody.match(/### Proposal\s*([\s\S]*?)(?=###|$)/);
+            const proposal = proposalMatch ? proposalMatch[1].trim() : 'No detailed proposal provided.';
+            
+            // Get current date for discussion title
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            
+            // Create discussion title
+            const discussionTitle = `[Discussion]: ${dateStr} | ${featureTitle}`;
+            
+            // Create clean discussion body
+            const discussionBody = `<div align="center">
+              <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/discussion-header.svg" alt="Feature Discussion">
+            </div>
+            
+            <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/title-about.svg" alt="About This Discussion">
+            
+            This discussion was automatically created for the feature request: ${issueUrl}
+            
+            **Proposed by:** @${issueAuthor}
+            
+            > [!NOTE]
+            > Thank you @${issueAuthor} for proposing this feature! Your contribution helps make Leviftas better for everyone.
+            
+            ---
+            
+            <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/title-proposal.svg" alt="Feature Proposal">
+            
+            ${proposal}
+            
+            ---
+            
+            <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/title-contribute.svg" alt="How to Contribute">
+            
+            We welcome your participation in this discussion! Here's how you can contribute:
+            
+            - **Share your thoughts** on the technical feasibility
+            - **Suggest improvements** or alternative approaches  
+            - **Provide use cases** that would benefit from this feature
+            - **Identify potential challenges** or conflicts
+            
+            > [!TIP]
+            > Focus on constructive feedback that helps refine and improve the proposal.
+            
+            > [!IMPORTANT]
+            > Before contributing, please read our [Contributing Guidelines](https://github.com/Frost-Leo/Leviftas/blob/main/CONTRIBUTING.md) to understand the project's standards and workflow.`;
+            
+            try {
+              // Get repository ID and category ID
+              const repoQuery = `
+                query($owner: String!, $name: String!) {
+                  repository(owner: $owner, name: $name) {
+                    id
+                    discussionCategories(first: 10) {
+                      nodes {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              const repoData = await github.graphql(repoQuery, {
+                owner: context.repo.owner,
+                name: context.repo.repo
+              });
+              
+              const repositoryId = repoData.repository.id;
+              const categories = repoData.repository.discussionCategories.nodes;
+              
+              // Find appropriate category
+              const category = categories.find(c => c.name === 'Ideas') || 
+                             categories.find(c => c.name === 'General') || 
+                             categories[0];
+              
+              if (!category) {
+                console.log('No discussion category found. Discussions may not be enabled.');
+                return;
+              }
+              
+              // Create discussion
+              const createDiscussionMutation = `
+                mutation($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
+                  createDiscussion(input: {
+                    repositoryId: $repositoryId,
+                    categoryId: $categoryId,
+                    title: $title,
+                    body: $body
+                  }) {
+                    discussion {
+                      url
+                      number
+                      id
+                    }
+                  }
+                }
+              `;
+              
+              const discussionData = await github.graphql(createDiscussionMutation, {
+                repositoryId: repositoryId,
+                categoryId: category.id,
+                title: discussionTitle,
+                body: discussionBody
+              });
+              
+              const discussionUrl = discussionData.createDiscussion.discussion.url;
+              const discussionNumber = discussionData.createDiscussion.discussion.number;
+              const discussionId = discussionData.createDiscussion.discussion.id;
+              
+              console.log(`Discussion created: ${discussionUrl}`);
+              
+              // Get repository labels to find label IDs
+              const labelsQuery = `
+                query($owner: String!, $name: String!) {
+                  repository(owner: $owner, name: $name) {
+                    labels(first: 50) {
+                      nodes {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              const labelsData = await github.graphql(labelsQuery, {
+                owner: context.repo.owner,
+                name: context.repo.repo
+              });
+              
+              const labels = labelsData.repository.labels.nodes;
+              const discussionLabel = labels.find(l => l.name === 'discussion');
+              const featureLabel = labels.find(l => l.name === 'feature');
+              
+              // Add labels to discussion
+              if (discussionLabel || featureLabel) {
+                const labelIds = [discussionLabel?.id, featureLabel?.id].filter(Boolean);
+                
+                if (labelIds.length > 0) {
+                  const addLabelsMutation = `
+                    mutation($discussionId: ID!, $labelIds: [ID!]!) {
+                      addLabelsToLabelable(input: {
+                        labelableId: $discussionId,
+                        labelIds: $labelIds
+                      }) {
+                        clientMutationId
+                      }
+                    }
+                  `;
+                  
+                  await github.graphql(addLabelsMutation, {
+                    discussionId: discussionId,
+                    labelIds: labelIds
+                  });
+                  
+                  console.log(`Labels added to discussion: ${labelIds.length} labels`);
+                }
+              }
+              
+              // Update issue with discussion link
+              const { data: currentIssue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number
+              });
+              
+              let updatedBody = currentIssue.body;
+              
+              // Find Related Links section and add discussion link
+              const relatedLinksRegex = /### Related Links\s*([\s\S]*?)(?=\n###|$)/;
+              const discussionLink = `- ${discussionUrl} - Community discussion for this feature`;
+              
+              if (relatedLinksRegex.test(updatedBody)) {
+                updatedBody = updatedBody.replace(relatedLinksRegex, (match, links) => {
+                  const trimmedLinks = links.trim();
+                  if (trimmedLinks) {
+                    return `### Related Links\n\n${discussionLink}\n${trimmedLinks}\n`;
+                  } else {
+                    return `### Related Links\n\n${discussionLink}\n`;
+                  }
+                });
+              }
+              
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: updatedBody
+              });
+              
+              // Add clean comment to issue
+              const comment = `<div align="center">
+              <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/discussion-created.svg" alt="Discussion Created">
+            </div>
+            
+            <img src="https://frost-leo.github.io/Leviftas/assets/images/github/discussion/ideas/feature-request/comment-title.svg" alt="Community Discussion Created">
+            
+            A discussion has been created to gather community feedback on this feature proposal.
+            
+            **📍 Discussion Link:** ${discussionUrl}
+            
+            **What happens next?**
+            - Community members will share their thoughts and suggestions
+            - We'll refine the proposal based on feedback
+            - Once consensus is reached, we'll move forward with implementation
+            
+            Thank you for contributing to Leviftas! 🚀`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: comment
+              });
+              
+            } catch (error) {
+              console.error('Failed to create discussion:', error);
+              
+              // Add error comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `> [!WARNING]
+            > Failed to automatically create a discussion. This might be because:
+            > - Discussions are not enabled for this repository
+            > - The repository doesn't have the required discussion categories
+            > 
+            > You can manually create a discussion and link it in the Related Links section.`
+              });
+            }
