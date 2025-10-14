@@ -93,16 +93,17 @@ body:
       value: |
         #
 
-  - type: checkboxes
+  - type: dropdown
     id: discussion-status
     attributes:
       label: Community Discussion
       description: |
         <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/feature-request/desc-discussion-status.svg" alt="Discussion Status">
       options:
-        - label: I have already created a discussion for this feature request
-        - label: I would like a discussion to be automatically created for this feature request
-        - label: This feature request does not need community discussion
+        - I have already created a discussion for this feature request
+        - I would like a discussion to be automatically created for this feature request
+        - This feature request does not need community discussion
+      default: 1
     validations:
       required: true
 
