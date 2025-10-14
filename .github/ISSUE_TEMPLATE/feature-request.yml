@@ -1,0 +1,128 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# feature-request.yml
+#
+# Leviftas project issues Feature Request template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/14
+# - Modified : 2025/10/14
+
+name: Feature Request
+description: |
+  Suggest new features or enhancements to improve the Leviftas project.
+title: "[Feature]: "
+labels:
+  - feature
+assignees:
+  - Frost-Leo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <div align="center">
+          <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/feature-request/header-feature-request.svg" alt="Feature Request Header">
+        </div>
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > **Before submitting this feature request, please confirm all items below:**
+
+  - type: checkboxes
+    id: before-confirming
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: There are no existing issues with the same or similar feature request
+          required: true
+        - label: I fully understand the project's goals and scope
+          required: true
+        - label: This feature aligns with the project's vision and roadmap
+          required: true
+        - label: I have checked the project's documentation for existing solutions
+          required: true
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!NOTE]
+        > **Proposing a feature to Leviftas?**
+        > 
+        > Major feature proposals should generally be discussed with the community first.
+        > Consider opening a discussion before submitting this issue to gather feedback and support.
+
+  - type: textarea
+    id: feature-proposal
+    attributes:
+      label: Proposal
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/feature-request/desc-feature-proposal.svg" alt="Feature Proposal">
+      placeholder: |
+        Explain your proposal, why it should be implemented, and how it would be used.
+        Add examples, if applicable. Put any code blocks inside triple backticks.
+        
+        ```python
+        # Add a code block here, if required
+        ```
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: checkboxes
+    id: discussion-status
+    attributes:
+      label: Community Discussion
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/feature-request/desc-discussion-status.svg" alt="Discussion Status">
+      options:
+        - label: I have already created a discussion for this feature request
+        - label: I would like a discussion to be automatically created for this feature request
+        - label: This feature request does not need community discussion
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+        
+        > [!TIP]
+        > Link any related discussions, issues, or PRs to provide better context for this feature request.
+
+  - type: textarea
+    id: related-links
+    attributes:
+      label: Related Links
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/feature-request/desc-related-links.svg" alt="Related Links">
+      placeholder: |
+        - https://github.com/Frost-Leo/Leviftas/discussions/123 - Community discussion about this feature
+        - https://github.com/Frost-Leo/Leviftas/issues/456 - Related issue
+        - https://github.com/Frost-Leo/Leviftas/pull/789 - Related pull request
+    validations:
+      required: false

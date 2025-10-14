@@ -184,16 +184,17 @@ body:
         #
         
         > [!TIP]
-        > Link any related PRs to provide better context for this issue.
+        > Link any related discussions, issues, or PRs to provide better context for this issue.
 
   - type: textarea
-    id: link-prs
+    id: related-links
     attributes:
-      label: Related Pull Requests
+      label: Related Links
       description: |
-        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/bug-report/desc-related-prs.svg" alt="Related PRs">
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/bug-report/desc-related-links.svg" alt="Related Links">
       placeholder: |
-        - https://github.com/your-username/leviftas/pull/123 - Fix for this issue
-        - https://github.com/your-username/leviftas/pull/124 - Related refactoring
+        - https://github.com/Frost-Leo/Leviftas/discussions/123 - Related discussion
+        - https://github.com/Frost-Leo/Leviftas/issues/456 - Related issue
+        - https://github.com/Frost-Leo/Leviftas/pull/789 - Fix for this issue
     validations:
       required: false
