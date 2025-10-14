@@ -1,0 +1,110 @@
+# Copyright © 2025 LeviftasTest authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# issues-add-header.yml
+#
+# Automatically add headers to new issues based on their labels
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/14
+# - Modified : 2025/10/14
+
+name: Add Header To Issue Body
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-header-to-issue-body:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check Issue Labels
+        id: check-labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map(label => label.name);
+            
+            // Define header mappings for different issue types
+            const headerMappings = {
+              'bug': {
+                svg: 'bug-report/bug-report-title.svg',
+                title: 'Bug Report Header'
+              },
+              'feature': {
+                svg: 'feature-request/feature-request-title.svg',
+                title: 'Feature Request Header'
+              }
+            };
+            
+            // Find matching label
+            let matchedLabel = null;
+            for (const label of labels) {
+              if (headerMappings[label]) {
+                matchedLabel = label;
+                break;
+              }
+            }
+            
+            if (matchedLabel) {
+              core.setOutput('matched_label', matchedLabel);
+              core.setOutput('svg_path', headerMappings[matchedLabel].svg);
+              core.setOutput('svg_title', headerMappings[matchedLabel].title);
+              core.setOutput('should_add_header', 'true');
+            } else {
+              core.setOutput('should_add_header', 'false');
+            }
+
+      - name: Add Header to Issue
+        if: steps.check-labels.outputs.should_add_header == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const currentBody = issue.body || '';
+            
+            // Check if header already exists
+            if (currentBody.includes('<!-- ISSUE_HEADER_ADDED -->')) {
+              console.log('Header already exists, skipping...');
+              return;
+            }
+            
+            // Format creation date
+            const createdAt = new Date(issue.created_at);
+            const formattedDate = createdAt.toISOString().replace('T', ' ').split('.')[0] + ' UTC';
+            
+            // Get SVG path from previous step
+            const svgPath = '${{ steps.check-labels.outputs.svg_path }}';
+            const svgTitle = '${{ steps.check-labels.outputs.svg_title }}';
+            const matchedLabel = '${{ steps.check-labels.outputs.matched_label }}';
+            
+            // Construct the header
+            const header = `<!-- ISSUE_HEADER_ADDED -->\n<div align="center"><img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/${svgPath}" alt="${svgTitle}"></div>\n\n> [!NOTE]\n> **Issue Information:**\n> **Reporter**: [@${issue.user.login}](https://github.com/${issue.user.login})\n> **Created**: ${formattedDate}\n> **Issue**: #${issue.number}\n\n`;
+            
+            // Update issue body
+            const newBody = header + currentBody;
+            
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: newBody
+            });
+            
+            console.log(`Header added to issue #${issue.number}`);
