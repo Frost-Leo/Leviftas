@@ -126,29 +126,5 @@ jobs:
           echo "Updated issue title from: $ORIGINAL_TITLE"
           echo "Updated issue title to: $NEW_TITLE"
           
-          # Save the titles for the next step
-          echo "ORIGINAL_TITLE=$ORIGINAL_TITLE" >> $GITHUB_ENV
-          echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
-          echo "TITLE_UPDATED=true" >> $GITHUB_ENV
 
-      - name: Add comment about title update
-        if: env.TITLE_UPDATED == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: |
-          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          
-          COMMENT="**Automated Title Formatting Notice**
 
-          > [!NOTE]
-          > The issue title has been automatically updated to include a standardized date format.
-          > 
-          > **Original title:** \`${{ env.ORIGINAL_TITLE }}\`
-          > **Updated title:** \`${{ env.NEW_TITLE }}\`
-          > 
-          > **Timestamp:** $TIMESTAMP
-          > 
-          > _This action was performed automatically by GitHub Actions_"
-          
-          gh issue comment $ISSUE_NUMBER --body "$COMMENT"
