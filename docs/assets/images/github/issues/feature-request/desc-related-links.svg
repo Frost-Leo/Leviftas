@@ -13,9 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-desc-related-prs.svg
+desc-related-links.svg
 
-Leviftas project Related PRs section image.
+Leviftas project Related Links section image.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
 - Created  : 2025/10/14
@@ -24,12 +24,12 @@ Leviftas project Related PRs section image.
 
 <svg xmlns='http://www.w3.org/2000/svg' width='600' height='40' viewBox='0 0 600 40'>
     <defs>
-        <linearGradient id='prGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+        <linearGradient id='linksGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style='stop-color:#064789'/>
             <stop offset='100%' style='stop-color:#127dbf'/>
         </linearGradient>
     </defs>
-    <text x='0' y='25' font-family='Arial, sans-serif' font-style='italic' fill='url(#prGrad)' font-size='14' text-anchor='start'>
-        If there are any pull requests related to this issue, please list them here.
+    <text x='0' y='25' font-family='Arial, sans-serif' font-style='italic' fill='url(#linksGrad)' font-size='14' text-anchor='start'>
+        Links to previous discussions, related issues, or pull requests about this feature.
     </text>
 </svg>
