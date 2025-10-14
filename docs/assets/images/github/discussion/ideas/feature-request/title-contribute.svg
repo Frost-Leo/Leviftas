@@ -13,33 +13,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-discussion-header.svg
+title-contribute.svg
 
-Feature Discussion header image.
+How to Contribute section title.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
 - Created  : 2025/10/14
 - Modified : 2025/10/14
 -->
 
-<svg xmlns='http://www.w3.org/2000/svg' width='700' height='150' viewBox='0 0 700 150'>
+<svg xmlns='http://www.w3.org/2000/svg' width='500' height='40' viewBox='0 0 500 40'>
     <defs>
-        <linearGradient id='discussGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+        <linearGradient id='contributeGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style='stop-color:#092140'/>
             <stop offset='50%' style='stop-color:#064789'/>
             <stop offset='100%' style='stop-color:#127dbf'/>
         </linearGradient>
     </defs>
-    <!-- Title -->
-    <text x='350' y='40' font-family='Arial, sans-serif' font-weight='bold' fill='url(#discussGrad)' font-size='24' text-anchor='middle'>
-        Feature Discussion
-    </text>
-    <!-- Thank you message -->
-    <text x='350' y='80' font-family='Segoe Print, cursive' font-weight='bold' fill='#064789' font-size='18' text-anchor='middle'>
-        Let's shape this feature together!
-    </text>
-    <!-- Second line -->
-    <text x='350' y='110' font-family='Segoe Print, cursive' fill='#1d1d1f' font-size='14' text-anchor='middle'>
-        Your insights and feedback will help us create a better solution for everyone.
+    <text x='0' y='28' font-family='Arial, sans-serif' font-weight='bold' fill='url(#contributeGrad)' font-size='22'>
+        How to Contribute
     </text>
 </svg>
