@@ -1,0 +1,35 @@
+<!-- Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+our-pledge.svg
+
+Our Pledge section title.
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/15
+- Modified : 2025/10/15
+-->
+
+<svg xmlns='http://www.w3.org/2000/svg' width='600' height='40' viewBox='0 0 600 40'>
+    <defs>
+        <linearGradient id='pledgeGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+            <stop offset='0%' style='stop-color:#092140'/>
+            <stop offset='50%' style='stop-color:#064789'/>
+            <stop offset='100%' style='stop-color:#127dbf'/>
+        </linearGradient>
+    </defs>
+    <text x='0' y='28' font-family='Arial, sans-serif' font-weight='bold' fill='url(#pledgeGrad)' font-size='22'>
+        Our Pledge
+    </text>
+</svg>
