@@ -79,7 +79,7 @@ jobs:
               .trim();
             
             // Extract proposal section
-            const proposalMatch = issueBody.match(/### Proposal\s*([\s\S]*?)(?=###|$)/);
+            const proposalMatch = issueBody.match(/### Proposal\s*([\s\S]*?)(?=### Community Discussion|### Related Links|$)/);
             const proposal = proposalMatch ? proposalMatch[1].trim() : 'No detailed proposal provided.';
             
             // Get current date for discussion title
