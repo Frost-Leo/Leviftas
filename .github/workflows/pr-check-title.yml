@@ -1,0 +1,90 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# pr-check-title.yml
+#
+# Check PR title format and warn if type tag is missing
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/15
+# - Modified : 2025/10/15
+
+name: Check Pull Request Title Format
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Check PR title format
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const title = pr.title;
+            
+            // Check if title has type tag (with or without gh-xxx)
+            const hasTypeTagWithIssue = /^gh-[0-9]+\s*\[[^\]]+\]:/.test(title);
+            const hasTypeTagWithoutIssue = /^\[[^\]]+\]:/.test(title);
+            const isBackport = /^\[[0-9]+\.[0-9]+\].*\(GH-[0-9]+\)/.test(title);
+            
+            const hasValidFormat = hasTypeTagWithIssue || hasTypeTagWithoutIssue || isBackport;
+            
+            if (!hasValidFormat) {
+              // Check if this is a repeat warning
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number
+              });
+              
+              const hasExistingWarning = comments.some(comment => 
+                comment.body.includes('<!-- TITLE_FORMAT_WARNING -->')
+              );
+              
+              const warningType = hasExistingWarning ? 'repeat' : 'first';
+              const warningMessage = hasExistingWarning ? 
+                'Your PR title still needs to be updated.' : 
+                'Please update your PR title to follow the required format.';
+              
+              // Add warning comment
+              const warningComment = `<!-- TITLE_FORMAT_WARNING -->
+            > [!WARNING]
+            > **Invalid PR Title Format** (${warningType} warning)
+            > 
+            > **Current title:** \`${title}\`
+            > 
+            > ${warningMessage} Please check the [title rules](https://frost-leo.github.io/Leviftas/assets/images/github/pull-request/title-rules.svg) for the correct format.
+            > 
+            > **⚠️ PRs with invalid titles may be rejected.**`;
+            
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: warningComment
+              });
+              
+              console.log(`${warningType} warning comment added to PR #${pr.number}`);
+            } else if (hasTypeTagWithIssue) {
+              console.log(`PR #${pr.number} has proper title format with issue reference`);
+            } else if (hasTypeTagWithoutIssue) {
+              console.log(`PR #${pr.number} has proper title format without issue reference`);
+            } else if (isBackport) {
+              console.log(`PR #${pr.number} is a backport PR with valid format`);
+            }
