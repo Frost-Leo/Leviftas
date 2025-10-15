@@ -12,9 +12,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-values-title.svg
+our-responsibilities.svg
 
-Community Values section title.
+Our Responsibilities section title.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
 - Created  : 2025/10/15
@@ -23,13 +23,13 @@ Community Values section title.
 
 <svg xmlns='http://www.w3.org/2000/svg' width='600' height='40' viewBox='0 0 600 40'>
     <defs>
-        <linearGradient id='valuesGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+        <linearGradient id='responsibilitiesGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style='stop-color:#092140'/>
             <stop offset='50%' style='stop-color:#064789'/>
             <stop offset='100%' style='stop-color:#127dbf'/>
         </linearGradient>
     </defs>
-    <text x='0' y='28' font-family='Arial, sans-serif' font-weight='bold' fill='url(#valuesGrad)' font-size='22'>
-        Our Community Values
+    <text x='0' y='28' font-family='Arial, sans-serif' font-weight='bold' fill='url(#responsibilitiesGrad)' font-size='22'>
+        Our Responsibilities
     </text>
 </svg>
