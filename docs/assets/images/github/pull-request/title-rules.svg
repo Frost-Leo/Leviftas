@@ -1,0 +1,127 @@
+<!--
+Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+title-rules.svg
+
+Leviftas project PR title rules image.
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/15
+- Modified : 2025/10/15
+-->
+
+<svg xmlns='http://www.w3.org/2000/svg' width='700' height='550' viewBox='0 0 700 550'>
+    <defs>
+        <linearGradient id='titleGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+            <stop offset='0%' style='stop-color:#092140'/>
+            <stop offset='50%' style='stop-color:#064789'/>
+            <stop offset='100%' style='stop-color:#127dbf'/>
+        </linearGradient>
+        <linearGradient id='ruleGrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+            <stop offset='0%' style='stop-color:#064789'/>
+            <stop offset='100%' style='stop-color:#127dbf'/>
+        </linearGradient>
+    </defs>
+    
+    <!-- Title -->
+    <text x='350' y='30' font-family='Arial, sans-serif' font-weight='bold' fill='url(#titleGrad)' font-size='24' text-anchor='middle'>
+        Pull Request Title Rules
+    </text>
+    
+    <!-- Format section -->
+    <text x='20' y='70' font-family='Arial, sans-serif' font-weight='bold' fill='url(#ruleGrad)' font-size='18'>
+        Supported Formats:
+    </text>
+    <text x='40' y='95' font-family='Courier New, monospace' fill='#333' font-size='14'>
+        1. gh-xxx [type]: Summary
+    </text>
+    <text x='40' y='115' font-family='Courier New, monospace' fill='#333' font-size='14'>
+        2. [type]: Summary
+    </text>
+    
+    <!-- Explanation section -->
+    <text x='20' y='150' font-family='Arial, sans-serif' font-weight='bold' fill='url(#ruleGrad)' font-size='18'>
+        Format Explanation:
+    </text>
+    <text x='40' y='175' font-family='Arial, sans-serif' fill='#333' font-size='13'>
+        • gh-xxx = GitHub issue number (e.g., gh-61, gh-123)
+    </text>
+    <text x='40' y='195' font-family='Arial, sans-serif' fill='#333' font-size='13'>
+        • [type] = Change type (required, see types below)
+    </text>
+    <text x='40' y='215' font-family='Arial, sans-serif' fill='#333' font-size='13'>
+        • Summary = Brief description of changes
+    </text>
+    <text x='40' y='235' font-family='Arial, sans-serif' fill='#666' font-size='12'>
+        Note: Issue number is optional for trivial changes (docs, chore, etc.)
+    </text>
+    
+    <!-- Examples section -->
+    <text x='20' y='270' font-family='Arial, sans-serif' font-weight='bold' fill='url(#ruleGrad)' font-size='18'>
+        Valid Examples:
+    </text>
+    <text x='40' y='295' font-family='Courier New, monospace' fill='#2d5016' font-size='12'>
+        ✓ gh-61 [feat]: Add authentication system
+    </text>
+    <text x='40' y='315' font-family='Courier New, monospace' fill='#2d5016' font-size='12'>
+        ✓ gh-123 [fix]: Fix memory leak in parser
+    </text>
+    <text x='40' y='335' font-family='Courier New, monospace' fill='#2d5016' font-size='12'>
+        ✓ [docs]: Update API documentation
+    </text>
+    <text x='40' y='355' font-family='Courier New, monospace' fill='#2d5016' font-size='12'>
+        ✓ [chore]: Update dependencies to latest
+    </text>
+    
+    <!-- Types section -->
+    <text x='20' y='390' font-family='Arial, sans-serif' font-weight='bold' fill='url(#ruleGrad)' font-size='18'>
+        Available Types:
+    </text>
+    <text x='40' y='415' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • feat: New features or enhancements
+    </text>
+    <text x='40' y='435' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • fix: Bug fixes and error corrections
+    </text>
+    <text x='40' y='455' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • docs: Documentation changes only
+    </text>
+    <text x='350' y='415' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • refactor: Code restructuring without new features
+    </text>
+    <text x='350' y='435' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • test: Adding or updating tests
+    </text>
+    <text x='350' y='455' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • style: Code formatting, whitespace, etc.
+    </text>
+    <text x='40' y='475' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • perf: Performance improvements
+    </text>
+    <text x='350' y='475' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • build: Build system or dependency changes
+    </text>
+    <text x='40' y='495' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • ci: CI/CD pipeline changes
+    </text>
+    <text x='350' y='495' font-family='Arial, sans-serif' fill='#333' font-size='12'>
+        • chore: Maintenance tasks, tooling updates
+    </text>
+    
+    <!-- Invalid examples -->
+    <text x='20' y='530' font-family='Arial, sans-serif' font-weight='bold' fill='#d32f2f' font-size='16'>
+        Invalid: ✗ gh-61: Add feature (missing type) ✗ Add feature (no format)
+    </text>
+</svg>
