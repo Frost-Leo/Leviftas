@@ -19,3 +19,174 @@
 # - Author   : FrostLeo <frostleo.dev@gmail.com>
 # - Created  : 2025/10/15
 # - Modified : 2025/10/15
+
+name: Add Date To Pull Request Title
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  add-date-to-pr-title:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add date to PR title
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ORIGINAL_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          
+          # Check if title already has the correct format with pipe separator
+          if echo "$ORIGINAL_TITLE" | grep -qE '^(gh-[0-9]+\s*)?(\[[^]]+\]):[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2} \|'; then
+              echo "Title already has the correct format, no changes needed"
+              exit 0
+          fi
+          
+          # Check for missing type tag and warn (both with and without gh-xxx)
+          if echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+:[[:space:]]*' || echo "$ORIGINAL_TITLE" | grep -qE '^[^[]*:[[:space:]]*' && ! echo "$ORIGINAL_TITLE" | grep -qE '\['; then
+              echo "WARNING: PR title is missing type tag (e.g., [feat], [fix], [docs])"
+              echo "PRs without type tags are likely to be rejected."
+              echo "Please update your title to include [type]"
+              echo "Original title: $ORIGINAL_TITLE"
+              exit 0
+          fi
+          
+          # Check various patterns and normalize them
+          
+          # Pattern 1: gh-NNNNNN [type]: YYYY-MM-DD XXXX (standard format, correct date, missing pipe)
+          if echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\s+\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(gh-[0-9]+\s+\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2})[[:space:]].*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\s+\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} | ${CONTENT}"
+          
+          # Pattern 2: gh-NNNNNN[type]: YYYY-MM-DD XXXX (missing space before [, correct date, missing pipe) - normalize format
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]'; then
+              # Extract components and normalize format
+              ISSUE_NUM=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-([0-9]+)\[[^]]+\]:.*/\1/')
+              TYPE_TAG=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+(\[[^]]+\]):.*/\1/')
+              DATE_PART=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\[[^]]+\]:[[:space:]]*([0-9]{4}-[0-9]{2}-[0-9]{2}).*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              # Normalize to standard format with space
+              NEW_TITLE="gh-${ISSUE_NUM} ${TYPE_TAG}: ${DATE_PART} | ${CONTENT}"
+          
+          # Pattern 3: gh-NNNNNN [type]: XXXX (standard format, no date)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\s+\[[^]]+\]:[[:space:]]*'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(gh-[0-9]+\s+\[[^]]+\]:).*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\s+\[[^]]+\]:[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 4: gh-NNNNNN[type]: XXXX (missing space before [, no date) - normalize to standard format
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\[[^]]+\]:[[:space:]]*'; then
+              # Extract components and normalize format
+              ISSUE_NUM=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-([0-9]+)\[[^]]+\]:.*/\1/')
+              TYPE_TAG=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+(\[[^]]+\]):.*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\[[^]]+\]:[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              # Normalize to standard format with space
+              NEW_TITLE="gh-${ISSUE_NUM} ${TYPE_TAG}: ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 5: gh-NNNNNN [type]:XXXX (missing space after :, no date)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\s+\[[^]]+\]:[^[:space:]]'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(gh-[0-9]+\s+\[[^]]+\]:).*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\s+\[[^]]+\]://')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 5a: gh-NNNNNN[type]:XXXX (missing space before [ and after :, no date)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\[[^]]+\]:[^[:space:]]'; then
+              # Extract components and normalize format
+              ISSUE_NUM=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-([0-9]+)\[[^]]+\]:.*/\1/')
+              TYPE_TAG=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+(\[[^]]+\]):.*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\[[^]]+\]://')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              # Normalize to standard format
+              NEW_TITLE="gh-${ISSUE_NUM} ${TYPE_TAG}: ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 5b: gh-NNNNNN [type} XXXX (wrong bracket type)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\s+\[[^}]+\}[[:space:]]*'; then
+              # Extract and fix bracket
+              ISSUE_NUM=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-([0-9]+)\s+\[.*/\1/')
+              TYPE_CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\s+\[([^}]+)\}[[:space:]]*(.*)/\1|\2/')
+              TYPE_TAG=$(echo "$TYPE_CONTENT" | cut -d'|' -f1)
+              CONTENT=$(echo "$TYPE_CONTENT" | cut -d'|' -f2-)
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              # Fix format with correct bracket
+              NEW_TITLE="gh-${ISSUE_NUM} [${TYPE_TAG}]: ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 5c: gh-NNNNNN[type} XXXX (missing space and wrong bracket)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^gh-[0-9]+\[[^}]+\}[[:space:]]*'; then
+              # Extract and fix bracket
+              ISSUE_NUM=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-([0-9]+)\[.*/\1/')
+              TYPE_CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^gh-[0-9]+\[([^}]+)\}[[:space:]]*(.*)/\1|\2/')
+              TYPE_TAG=$(echo "$TYPE_CONTENT" | cut -d'|' -f1)
+              CONTENT=$(echo "$TYPE_CONTENT" | cut -d'|' -f2-)
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              # Fix format with correct bracket and space
+              NEW_TITLE="gh-${ISSUE_NUM} [${TYPE_TAG}]: ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 6: [type]: YYYY-MM-DD XXXX (no gh-xxx, correct date, missing pipe)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2})[[:space:]].*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^\[[^]]+\]:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} | ${CONTENT}"
+          
+          # Pattern 7: [type]: XXXX (no gh-xxx, no date)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^\[[^]]+\]:[[:space:]]*'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(\[[^]]+\]:).*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^\[[^]]+\]:[[:space:]]*//')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 8: [type]:XXXX (no gh-xxx, missing space after :, no date)
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^\[[^]]+\]:[^[:space:]]'; then
+              PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(\[[^]]+\]:).*/\1/')
+              CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^\[[^]]+\]://')
+              # Remove existing pipe separator if present
+              CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+              NEW_TITLE="${PREFIX} ${CURRENT_DATE} | ${CONTENT}"
+          
+          # Pattern 9: [X.Y] title (GH-NNNNNN) - backport PR format
+          elif echo "$ORIGINAL_TITLE" | grep -qE '^\[[0-9]+\.[0-9]+\].*\(GH-[0-9]+\)'; then
+              # For backport PRs, check if date is already present
+              if echo "$ORIGINAL_TITLE" | grep -qE '^\[[0-9]+\.[0-9]+\][[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2} \|'; then
+                  echo "Backport PR title already has the correct format, no changes needed"
+                  exit 0
+              else
+                  PREFIX=$(echo "$ORIGINAL_TITLE" | sed -E 's/^(\[[0-9]+\.[0-9]+\]).*/\1/')
+                  CONTENT=$(echo "$ORIGINAL_TITLE" | sed -E 's/^\[[0-9]+\.[0-9]+\][[:space:]]*//')
+                  # Remove existing pipe separator if present
+                  CONTENT=$(echo "$CONTENT" | sed -E 's/^[[:space:]]*\|[[:space:]]*//')
+                  NEW_TITLE="${PREFIX} ${CURRENT_DATE} | ${CONTENT}"
+              fi
+          
+          else
+              # Title doesn't match expected pattern, leave it unchanged
+              echo "Title doesn't match expected pattern, no changes made"
+              echo "Original title: $ORIGINAL_TITLE"
+              exit 0
+          fi
+          
+          # Update the PR title
+          gh pr edit $PR_NUMBER --title "$NEW_TITLE"
+          echo "Updated PR title from: $ORIGINAL_TITLE"
+          echo "Updated PR title to: $NEW_TITLE"
