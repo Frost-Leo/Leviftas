@@ -1,0 +1,206 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# enhancement.yml
+#
+# Leviftas project issues Enhancement template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/16
+# - Modified : 2025/10/16
+
+name: Enhancement/Improvement
+description: |
+  Suggest improvements to existing features to enhance user experience or performance.
+title: "[Enhancement]: "
+labels:
+  - enhancement
+assignees:
+  - Frost-Leo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <div align="center">
+          <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/header-enhancement.svg" alt="Enhancement Header">
+        </div>
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > **Before submitting this enhancement request, please confirm all items below:**
+
+  - type: checkboxes
+    id: before-confirming
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: There are no existing issues with the same or similar enhancement
+          required: true
+        - label: This is an improvement to existing functionality, not a new feature
+          required: true
+        - label: I have tested the current implementation
+          required: true
+        - label: This enhancement aligns with the project's goals
+          required: true
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!NOTE]
+        > **Want to implement this enhancement yourself?**
+        > 
+        > We encourage contributors to implement their own enhancement suggestions! 
+        > If you're interested in working on this:
+        > 
+        > 1. Comment below to let us know you'd like to take this on
+        > 2. We'll assign the issue to you
+        > 3. Fork the repository and create your implementation
+        > 4. Submit a Pull Request when ready
+        > 
+        > Need help getting started? Check our [Contributing Guidelines](https://github.com/Frost-Leo/Leviftas/blob/main/CONTRIBUTING.md)!
+
+  - type: checkboxes
+    id: implementation-interest
+    attributes:
+      label: Implementation Interest
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-implementation-interest.svg" alt="Implementation Interest">
+      options:
+        - label: I am interested in implementing this enhancement myself
+          required: false
+        - label: I would like help from other contributors
+          required: false
+        - label: I am only suggesting this enhancement
+          required: false
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: textarea
+    id: enhancement-proposal
+    attributes:
+      label: Enhancement Proposal
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-enhancement-proposal.svg" alt="Enhancement Proposal">
+      placeholder: |
+        Describe your enhancement proposal in detail. Explain:
+        - What aspect of the existing feature you want to improve
+        - Why this improvement is beneficial
+        - Who would benefit from this enhancement
+        
+        ```python
+        # Include code examples if relevant
+        ```
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-current-behavior.svg" alt="Current Behavior">
+      placeholder: |
+        Describe how the feature currently works and what limitations or issues you've observed.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-expected-behavior.svg" alt="Expected Behavior">
+      placeholder: |
+        Describe how you would like the feature to work after the enhancement is implemented.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: dropdown
+    id: enhancement-type
+    attributes:
+      label: Enhancement Type
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-enhancement-type.svg" alt="Enhancement Type">
+      options:
+        - Performance Improvement
+        - User Experience (UX)
+        - Code Quality
+        - Error Handling
+        - Documentation in Code
+        - Accessibility
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-priority.svg" alt="Priority">
+      options:
+        - Low - Nice to have
+        - Medium - Would improve daily usage
+        - High - Significantly improves functionality
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+        
+        > [!TIP]
+        > Link any related discussions, issues, or PRs to provide better context for this enhancement.
+
+  - type: textarea
+    id: related-links
+    attributes:
+      label: Related Links
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/enhancement/desc-related-links.svg" alt="Related Links">
+      placeholder: |
+        - https://github.com/Frost-Leo/Leviftas/issues/123 - Related issue
+        - https://github.com/Frost-Leo/Leviftas/discussions/456 - Related discussion
+    validations:
+      required: false
