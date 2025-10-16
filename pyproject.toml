@@ -114,3 +114,60 @@ where = [
 # Dynamic metadata
 [tool.setuptools.dynamic]
 version = {attr = "leviftas.__version__"}
+
+# Testing configuration options
+[tool.pytest.ini_options]
+testpaths = "tests"
+xfail_strict = true
+pythonpath = [
+    "src",
+]
+addopts = [
+    # Only overwrite the src/leviftas directory and exclude the test files
+    "--cov=src/leviftas",
+    # Detailed mode, displaying each test node
+    "-v",
+    # Short backtracking information
+    "--tb=short",
+    # Strict marking mode
+    "--strict-markers",
+    # Generate coverage report in HTML format
+    "--cov-report=html",
+    # Display coverage report in terminal
+    "--cov-report=term",
+    # Show uncovered line numbers
+    "--cov-report=term-missing",
+    # Branch coverage
+    "--cov-branch",
+]
+markers = [
+    "internal: Internal system class-related tests",
+]
+
+# Coverage configuration options
+[tool.coverage.run]
+source = ["src/leviftas"]
+branch = true
+relative_files = true
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if TYPE_CHECKING:',
+    'if typing.TYPE_CHECKING:',
+    '@overload',
+    '@typing.overload',
+    '\(Protocol\):$',
+    'typing.assert_never',
+    'assert_never',
+]
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
