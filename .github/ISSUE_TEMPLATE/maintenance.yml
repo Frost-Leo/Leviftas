@@ -1,0 +1,129 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# maintenance.yml
+#
+# Leviftas project issues Maintenance template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/16
+# - Modified : 2025/10/16
+
+name: Maintenance/Chore
+description: |
+  Request dependency updates, configuration changes, or code cleanup tasks.
+title: "[Maintenance]: "
+labels:
+  - maintenance
+  - chore
+assignees:
+  - Frost-Leo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <div align="center">
+          <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/maintenance/header-maintenance.svg" alt="Maintenance Header">
+        </div>
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > **Before submitting this maintenance request, please confirm all items below:**
+
+  - type: checkboxes
+    id: before-confirming
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: There are no existing issues with the same maintenance request
+          required: true
+        - label: This is a maintenance task, not a new feature or bug fix
+          required: true
+        - label: I have checked the current project status
+          required: true
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: dropdown
+    id: maintenance-type
+    attributes:
+      label: Maintenance Type
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/maintenance/desc-maintenance-type.svg" alt="Maintenance Type">
+      options:
+        - Dependency Updates
+        - Configuration Changes
+        - Code Cleanup/Refactoring
+        - CI/CD Improvements
+        - Tooling Updates
+        - Security Updates
+        - Other
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: textarea
+    id: maintenance-description
+    attributes:
+      label: Maintenance Description
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/maintenance/desc-maintenance-description.svg" alt="Maintenance Description">
+      placeholder: |
+        Please describe the maintenance task:
+        
+        **What needs to be done:**
+        Specific maintenance task or update required.
+        
+        **Why it's needed:**
+        Reason for this maintenance (security, performance, compatibility, etc.).
+        
+        **Expected benefits:**
+        What improvements this maintenance will bring.
+        
+        **Additional context:**
+        Any other relevant information.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+        
+        > [!TIP]
+        > Link any related discussions, issues, or PRs to provide better context for this maintenance request.
+
+  - type: textarea
+    id: related-links
+    attributes:
+      label: Related Links
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/maintenance/desc-related-links.svg" alt="Related Links">
+      placeholder: |
+        - https://github.com/Frost-Leo/Leviftas/issues/123 - Related issue
+        - https://github.com/Frost-Leo/Leviftas/discussions/456 - Related discussion
+        - https://example.com/security-advisory - Security advisory
+    validations:
+      required: false
