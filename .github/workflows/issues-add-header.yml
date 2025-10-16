@@ -18,7 +18,7 @@
 #
 # - Author   : FrostLeo <frostleo.dev@gmail.com>
 # - Created  : 2025/10/14
-# - Modified : 2025/10/14
+# - Modified : 2025/10/16
 
 name: Add Header To Issue Body
 on:
@@ -50,6 +50,18 @@ jobs:
               'feature': {
                 svg: 'feature-request/feature-request-title.svg',
                 title: 'Feature Request Header'
+              },
+              'enhancement': {
+                svg: 'enhancement/enhancement-title.svg',
+                title: 'Enhancement Header'
+              },
+              'documentation': {
+                svg: 'documentation/documentation-title.svg',
+                title: 'Documentation Header'
+              },
+              'maintenance': {
+                svg: 'maintenance/maintenance-title.svg',
+                title: 'Maintenance Header'
               }
             };
             
