@@ -1,0 +1,107 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# documentation.yml
+#
+# Leviftas project issues Documentation template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/16
+# - Modified : 2025/10/16
+
+name: Documentation
+description: |
+  Report documentation issues or suggest improvements to project documentation.
+title: "[Docs]: "
+labels:
+  - documentation
+assignees:
+  - Frost-Leo
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <div align="center">
+          <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/documentation/header-documentation.svg" alt="Documentation Header">
+        </div>
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > **Before submitting this documentation issue, please confirm all items below:**
+
+  - type: checkboxes
+    id: before-confirming
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: There are no existing issues with the same documentation problem
+          required: true
+        - label: I have searched the existing documentation
+          required: true
+        - label: I have checked the latest version of the documentation
+          required: true
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+
+  - type: textarea
+    id: documentation-issue
+    attributes:
+      label: Documentation Issue
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/documentation/desc-documentation-issue.svg" alt="Documentation Issue">
+      placeholder: |
+        Please provide the following information:
+        
+        **Documentation Location:**
+        - URL: https://example.com/docs/page
+        - File path: docs/README.md
+        - Section: Installation Guide
+        
+        **Issue Description:**
+        Describe what's wrong, missing, or unclear in the documentation.
+        
+        **Suggested Improvement (optional):**
+        How do you think this should be improved?
+        
+        **Additional Context:**
+        Any other relevant information.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        #
+        
+        > [!TIP]
+        > Link any related discussions, issues, or PRs to provide better context for this documentation issue.
+
+  - type: textarea
+    id: related-links
+    attributes:
+      label: Related Links
+      description: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/documentation/desc-related-links.svg" alt="Related Links">
+      placeholder: |
+        - https://github.com/Frost-Leo/Leviftas/issues/123 - Related issue
+        - https://github.com/Frost-Leo/Leviftas/discussions/456 - Related discussion
+    validations:
+      required: false
