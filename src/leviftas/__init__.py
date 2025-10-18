@@ -28,7 +28,7 @@ __author__: str = "Frost Leo"
 __email__: str = "frostleo.dev@gmail.com"
 __license__: str = "GPL-3.0-or-later"
 
-__version__: str = "0.1.1"
+__version__: str = "0.2.0"
 
 __all__ = [
     "__version__",
