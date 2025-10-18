@@ -19,7 +19,7 @@ Version history and change log for Leviftas project following Keep a Changelog f
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
 - Created  : 2025/10/17
-- Modified : 2025/10/17
+- Modified : 2025/10/19
 -->
 
 <div align="center">
@@ -35,58 +35,99 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.1.1] (2025-10-16)
+## [Unreleased]
 
+---
 
-### Features
+## [0.2.0-dev] - In Development
 
-* **templates:** add enhancement/improvement issue template ([#11](https://github.com/Frost-Leo/Leviftas/issues/11)) ([bc1cff5](https://github.com/Frost-Leo/Leviftas/commit/bc1cff5)), closes [#10](https://github.com/Frost-Leo/Leviftas/issues/10)
-  - includes current behavior, expected behavior, and priority fields
-  - tracks implementation interest to encourage self-contribution
-* **templates:** add documentation issue template ([#11](https://github.com/Frost-Leo/Leviftas/issues/11)) ([7db67e5](https://github.com/Frost-Leo/Leviftas/commit/7db67e5)), closes [#10](https://github.com/Frost-Leo/Leviftas/issues/10)
-  - uses simplified unified description approach
-  - covers documentation errors, missing docs, and improvements
-* **templates:** add maintenance/chore issue template ([#11](https://github.com/Frost-Leo/Leviftas/issues/11)) ([324a186](https://github.com/Frost-Leo/Leviftas/commit/324a186)), closes [#10](https://github.com/Frost-Leo/Leviftas/issues/10)
-  - covers dependency updates, configuration changes, CI/CD improvements
-  - includes maintenance type categorization
-* **ci:** add automated testing workflow ([#9](https://github.com/Frost-Leo/Leviftas/issues/9)) ([e2edee3](https://github.com/Frost-Leo/Leviftas/commit/e2edee3)), closes [#8](https://github.com/Frost-Leo/Leviftas/issues/8)
-  - runs pytest with coverage reporting on push and PR
-  - integrated with Codecov for coverage tracking
+Development version preparing for v0.2.0 release with version management improvements.
 
+### Added
+- **Issue Templates** ([#16](https://github.com/Frost-Leo/Leviftas/issues/16))
+  - Version 0.2 label to all issue templates for better milestone tracking and categorization
+  - Improved template organization for v0.2.0 development cycle
 
-### Bug Fixes
+### Changed
+- **Version Management** ([#16](https://github.com/Frost-Leo/Leviftas/issues/16))
+  - Version number updated from `0.1.1` to `0.2.0-dev` in `src/leviftas/__init__.py`
+  - Established clear version boundary between stable v0.1 and development v0.2
+- **Documentation** ([#16](https://github.com/Frost-Leo/Leviftas/issues/16))
+  - Restructured CHANGELOG.md following Keep a Changelog format more strictly
+  - Reorganized v0.1 release entries with better categorization and functional grouping
+  - Added comprehensive descriptions for historical releases
+  - Aligned version management strategy with simplified tagging approach
 
-* **workflows:** fix discussion content truncation ([#6](https://github.com/Frost-Leo/Leviftas/issues/6)) ([21b9694](https://github.com/Frost-Leo/Leviftas/commit/21b9694)), closes [#5](https://github.com/Frost-Leo/Leviftas/issues/5)
-  - updated regex pattern in `issues-feature-discussion.yml`
-  - prevented proposal content from being cut off at internal headings
+---
 
+## [0.1.1] - 2025-10-17
 
+Second development iteration expanding GitHub community infrastructure and establishing changelog documentation.
 
-## [0.1.0] (2025-10-13)
+### Added
+- **Issue Templates** ([#11](https://github.com/Frost-Leo/Leviftas/pull/11)) - Closes [#10](https://github.com/Frost-Leo/Leviftas/issues/10)
+  - Enhancement/Improvement template with priority tracking and implementation interest fields
+  - Documentation template covering errors, missing docs, and improvements with unified description
+  - Maintenance/Chore template for dependency updates, configuration changes, and CI/CD improvements
+- **CI/CD** ([#9](https://github.com/Frost-Leo/Leviftas/pull/9)) - Closes [#8](https://github.com/Frost-Leo/Leviftas/issues/8)
+  - GitHub Actions workflow for automated testing on push and pull requests
+  - Pytest execution with coverage reporting for Python 3.13
+  - Codecov integration for coverage tracking and reporting
+- **Documentation** ([#13](https://github.com/Frost-Leo/Leviftas/pull/13)) - Closes [#12](https://github.com/Frost-Leo/Leviftas/issues/12)
+  - `CHANGELOG.md` following Keep a Changelog v1.0.0 specification
+  - Changelog header SVG visual asset
+  - Comprehensive documentation of v0.1.0 release
 
-Initial release establishing foundation for Leviftas SDK project.
+### Fixed
+- **GitHub Workflows** ([#6](https://github.com/Frost-Leo/Leviftas/pull/6)) - Closes [#5](https://github.com/Frost-Leo/Leviftas/issues/5)
+  - Discussion proposal content truncation in `issues-feature-discussion.yml`
+  - Updated regex pattern to preserve complete proposal content including internal headings
+  - Improved content extraction for feature request discussions
 
+---
 
-### Features
+## [0.1.0] - 2025-10-16
 
-* **sdk:** initialize Leviftas SDK package structure ([#7](https://github.com/Frost-Leo/Leviftas/issues/7)) ([9b58ed1](https://github.com/Frost-Leo/Leviftas/commit/9b58ed1)), closes [#3](https://github.com/Frost-Leo/Leviftas/issues/3)
-  - created `src/leviftas/` package directory
-  - configured `pyproject.toml` following PEP 621 standards
-  - set up setuptools build backend
-* **testing:** add pytest configuration and test infrastructure ([#7](https://github.com/Frost-Leo/Leviftas/issues/7)) ([cf4d9d8](https://github.com/Frost-Leo/Leviftas/commit/cf4d9d8)), closes [#3](https://github.com/Frost-Leo/Leviftas/issues/3)
-  - initialized `tests/` directory structure
-  - configured pytest with coverage reporting
-  - implemented package metadata validation tests
-* **community:** establish GitHub community infrastructure ([#2](https://github.com/Frost-Leo/Leviftas/issues/2)) ([d64c71d](https://github.com/Frost-Leo/Leviftas/commit/d64c71d)), closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
-  - created bug report and feature request templates
-  - added PR template with standardized format
-* **community:** add community health files ([#2](https://github.com/Frost-Leo/Leviftas/issues/2)) ([b9944d7](https://github.com/Frost-Leo/Leviftas/commit/b9944d7)), closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
-  - `CONTRIBUTING.md` - contribution guidelines
-  - `CODE_OF_CONDUCT.md` - community standards (Contributor Covenant v2.1)
-  - `SECURITY.md` - security policy and vulnerability reporting
-  - `CODEOWNERS` - file ownership and review assignments
-* **workflows:** add issue and PR automation ([#2](https://github.com/Frost-Leo/Leviftas/issues/2)) ([2ecb567](https://github.com/Frost-Leo/Leviftas/commit/2ecb567)), closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
-  - automatic issue title date formatting
-  - dynamic header insertion based on labels
-  - automatic discussion creation for feature requests
-  - PR title formatting and validation
+**First pre-release** establishing the foundation and core infrastructure for the Leviftas SDK project.
+
+### Added
+- **SDK Package Structure** ([#7](https://github.com/Frost-Leo/Leviftas/pull/7)) - Closes [#3](https://github.com/Frost-Leo/Leviftas/issues/3)
+  - `src/leviftas/` package directory with proper initialization
+  - Package metadata: `__version__`, `__author__`, `__email__`, `__license__`
+  - GPL-3.0 license headers and comprehensive documentation
+- **Build System** ([#7](https://github.com/Frost-Leo/Leviftas/pull/7)) - Closes [#3](https://github.com/Frost-Leo/Leviftas/issues/3)
+  - `pyproject.toml` configuration following modern Python packaging standards (PEP 621)
+  - Setuptools build backend with dynamic version reading
+  - Project metadata, dependencies, and classifiers
+  - Optional test dependencies group
+- **Testing Infrastructure** ([#7](https://github.com/Frost-Leo/Leviftas/pull/7)) - Closes [#3](https://github.com/Frost-Leo/Leviftas/issues/3)
+  - `tests/` directory structure with `conftest.py`
+  - Pytest configuration with HTML and terminal coverage reporting
+  - Test markers and branch coverage analysis
+  - Package metadata validation tests (5 tests passing)
+- **GitHub Community Infrastructure** ([#2](https://github.com/Frost-Leo/Leviftas/pull/2)) - Closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
+  - Issue templates: Bug Report (`bug_report.yml`) and Feature Request (`feature_request.yml`)
+  - Pull Request template (`PULL_REQUEST_TEMPLATE.md`) with testing checklist
+  - Issue template configuration disabling blank issues
+- **Community Health Files** ([#2](https://github.com/Frost-Leo/Leviftas/pull/2)) - Closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
+  - `CONTRIBUTING.md` - Contribution guidelines and development workflow
+  - `CODE_OF_CONDUCT.md` - Community behavior standards (Contributor Covenant v2.1)
+  - `SECURITY.md` - Security policy and vulnerability reporting procedures
+  - `CODEOWNERS` - File ownership definitions and automatic review assignments
+- **Automation Workflows** ([#2](https://github.com/Frost-Leo/Leviftas/pull/2)) - Closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
+  - Issue automation: automatic date formatting, dynamic header insertion, discussion creation
+  - PR automation: title formatting and validation, metadata insertion, label assignment
+- **Visual Assets** ([#2](https://github.com/Frost-Leo/Leviftas/pull/2)) - Closes [#1](https://github.com/Frost-Leo/Leviftas/issues/1)
+  - Professional SVG graphics for templates and workflows
+  - Consistent visual style using project theme colors
+  - Organized asset structure in `docs/assets/images/github/`
+
+---
+
+## Release Links
+
+- [0.1](https://github.com/Frost-Leo/Leviftas/releases/tag/0.1) - First pre-release (2025-10-16)
+
+---
+
+**Note**: This project uses simplified version tagging (e.g., `0.1`, `0.2`) similar to Python's release branch strategy. CHANGELOG maintains detailed revision history (e.g., `0.1.0`, `0.1.1`) for development tracking, but only major/minor versions receive git tags.

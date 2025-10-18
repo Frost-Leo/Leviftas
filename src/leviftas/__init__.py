@@ -21,7 +21,7 @@ Leviftas SDK package initialization.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
 - Created  : 2025/10/16 
-- Modified : 2025/10/16
+- Modified : 2025/10/19
 """
 
 __author__: str = "Frost Leo"
