@@ -26,6 +26,7 @@ description: |
 title: "[Bug]: "
 labels:
   - bug
+  - 0.2
 assignees:
   - Frost-Leo
 body:
