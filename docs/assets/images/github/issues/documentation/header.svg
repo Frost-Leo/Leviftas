@@ -1,0 +1,73 @@
+<!--
+Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+header.svg
+
+Header file for documentation
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/31
+- Modified : 2025/10/31
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%"
+     viewBox="0 0 1000 140"
+     preserveAspectRatio="xMidYMid meet">
+
+    <!-- Gradient Definitions -->
+    <defs>
+        <!-- Light Mode Gradient: Dark blue to light blue -->
+        <linearGradient id="documentation-title-gradient-light"
+                        x1="0%" y1="0%"
+                        x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#022640"/>
+            <stop offset="95%" style="stop-color:#5786AB"/>
+        </linearGradient>
+
+        <!-- Dark Mode Gradient: Light teal to dark blue-gray -->
+        <linearGradient id="documentation-title-gradient-dark"
+                        x1="0%" y1="0%"
+                        x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#E4F6F0"/>
+            <stop offset="31%" style="stop-color:#9DCFCA"/>
+            <stop offset="68%" style="stop-color:#6B95AC"/>
+            <stop offset="100%" style="stop-color:#45657D"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Responsive Styles for Dark/Light Mode -->
+    <style>
+        @media (prefers-color-scheme: dark) {
+            .documentation-title { fill: url(#documentation-title-gradient-dark); }
+        }
+        @media (prefers-color-scheme: light) {
+            .documentation-title { fill: url(#documentation-title-gradient-light); }
+        }
+    </style>
+
+    <!-- documentation Title -->
+    <text x="20" y="50"
+          class="documentation-title"
+          fill="url(#documentation-title-gradient-light)"
+          font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="56"
+          font-weight="600"
+          letter-spacing="0.03em"
+          text-anchor="start">
+        Documentation
+    </text>
+    
+</svg>

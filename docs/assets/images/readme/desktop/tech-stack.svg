@@ -1,0 +1,631 @@
+<!--
+Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+tech-stack.svg
+
+Interactive technology stack showcase with animated tab navigation.
+Features auto-cycling content sections for 8 core technologies with
+responsive dark/light mode support and smooth transitions.
+Each technology displays version info, key features, and links to documentation.
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/31
+- Modified : 2025/10/31
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%"
+     viewBox="0 0 1000 350"
+     preserveAspectRatio="xMidYMid meet">
+
+    <!-- Visual Effects Definitions -->
+    <defs>
+        <!-- Backdrop blur filter for tab navigation -->
+        <filter id="backdrop-blur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+        </filter>
+
+        <!-- Tab Navigation Background Gradient - Light Mode -->
+        <linearGradient id="tabnav-bg-light" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#E8E8ED;stop-opacity:0.72" />
+            <stop offset="100%" style="stop-color:#E8E8ED;stop-opacity:0.72" />
+        </linearGradient>
+
+        <!-- Tab Navigation Background Gradient - Dark Mode -->
+        <linearGradient id="tabnav-bg-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#333336;stop-opacity:0.7" />
+            <stop offset="100%" style="stop-color:#333336;stop-opacity:0.7" />
+        </linearGradient>
+    </defs>
+
+    <!-- Responsive Styles and Animations -->
+    <style>
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            .tech-stack-title { fill: #F5F5F7; }
+            .tech-name-primary { fill: #F5F5F7; }
+            .tech-name-secondary { fill: #A1A1A6; }
+            .tech-description { fill: #A1A1A6; }
+            .tech-highlight { fill: #F5F5F7; }
+            .tech-features { fill: #86868B; }
+            .tabnav-platter { fill: url(#tabnav-bg-dark); }
+            .tabnav-indicator { fill: #F5F5F7; }
+            .tech-icon { fill: #F5F5F7; }
+            .tech-icon-active { fill: #000000; }
+            .content-link:hover .tech-name-primary { fill: #0071E3; }
+            .content-link:hover .tech-highlight { fill: #0071E3; }
+        }
+
+        /* Light Mode Styles */
+        @media (prefers-color-scheme: light) {
+            .tech-stack-title { fill: #1D1D1F; }
+            .tech-name-primary { fill: #1D1D1F; }
+            .tech-name-secondary { fill: #86868B; }
+            .tech-description { fill: #86868B; }
+            .tech-highlight { fill: #1D1D1F; }
+            .tech-features { fill: #A1A1A6; }
+            .tabnav-platter { fill: url(#tabnav-bg-light); }
+            .tabnav-indicator { fill: #1D1D1F; }
+            .tech-icon { fill: #000000; }
+            .tech-icon-active { fill: #FFFFFF; }
+            .content-link:hover .tech-name-primary { fill: #0071E3; }
+            .content-link:hover .tech-highlight { fill: #0071E3; }
+        }
+
+        /* Interactive hover effects */
+        .content-link {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .content-link text {
+            transition: fill 0.2s ease;
+        }
+
+        /* Tab indicator sliding animation - 8 technology items */
+        .tabnav-indicator {
+            animation: slide 24s ease-in-out infinite;
+        }
+
+        @keyframes slide {
+            0%, 11.5% { transform: translateX(6px); }
+            12.5%, 23.5% { transform: translateX(103px); }
+            25%, 36% { transform: translateX(200px); }
+            37.5%, 48.5% { transform: translateX(297px); }
+            50%, 61% { transform: translateX(394px); }
+            62.5%, 73.5% { transform: translateX(491px); }
+            75%, 86% { transform: translateX(588px); }
+            87.5%, 98.5% { transform: translateX(685px); }
+            100% { transform: translateX(6px); }
+        }
+
+        /* Icon color cycling animations - 8 items */
+        .icon-python { animation: icon-cycle-1 24s ease-in-out infinite; }
+        .icon-django { animation: icon-cycle-2 24s ease-in-out infinite; }
+        .icon-drf { animation: icon-cycle-3 24s ease-in-out infinite; }
+        .icon-pydantic { animation: icon-cycle-4 24s ease-in-out infinite; }
+        .icon-opentelemetry { animation: icon-cycle-5 24s ease-in-out infinite; }
+        .icon-redis { animation: icon-cycle-6 24s ease-in-out infinite; }
+        .icon-postgresql { animation: icon-cycle-7 24s ease-in-out infinite; }
+        .icon-github { animation: icon-cycle-8 24s ease-in-out infinite; }
+
+        /* Individual icon animation keyframes */
+        @keyframes icon-cycle-1 {
+            0%, 11.5% { fill: var(--active-color); }
+            12.5%, 98.5% { fill: var(--inactive-color); }
+            100% { fill: var(--active-color); }
+        }
+
+        @keyframes icon-cycle-2 {
+            0%, 11.5% { fill: var(--inactive-color); }
+            12.5%, 23.5% { fill: var(--active-color); }
+            25%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-3 {
+            0%, 23.5% { fill: var(--inactive-color); }
+            25%, 36% { fill: var(--active-color); }
+            37.5%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-4 {
+            0%, 36% { fill: var(--inactive-color); }
+            37.5%, 48.5% { fill: var(--active-color); }
+            50%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-5 {
+            0%, 48.5% { fill: var(--inactive-color); }
+            50%, 61% { fill: var(--active-color); }
+            62.5%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-6 {
+            0%, 61% { fill: var(--inactive-color); }
+            62.5%, 73.5% { fill: var(--active-color); }
+            75%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-7 {
+            0%, 73.5% { fill: var(--inactive-color); }
+            75%, 86% { fill: var(--active-color); }
+            87.5%, 100% { fill: var(--inactive-color); }
+        }
+
+        @keyframes icon-cycle-8 {
+            0%, 86% { fill: var(--inactive-color); }
+            87.5%, 98.5% { fill: var(--active-color); }
+            100% { fill: var(--inactive-color); }
+        }
+
+        /* Icon color variables for different color schemes */
+        @media (prefers-color-scheme: dark) {
+            .icon-python, .icon-django, .icon-drf, .icon-pydantic,
+            .icon-opentelemetry, .icon-redis, .icon-postgresql, .icon-github {
+                --active-color: #000000;
+                --inactive-color: #F5F5F7;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .icon-python, .icon-django, .icon-drf, .icon-pydantic,
+            .icon-opentelemetry, .icon-redis, .icon-postgresql, .icon-github {
+                --active-color: #FFFFFF;
+                --inactive-color: #000000;
+            }
+        }
+
+        /* Content section visibility animations - 8 items */
+        .content-python { opacity: 1; animation: content-cycle 24s ease-in-out infinite; pointer-events: auto; }
+        .content-django { opacity: 0; animation: content-cycle 24s ease-in-out infinite 3s; pointer-events: none; }
+        .content-drf { opacity: 0; animation: content-cycle 24s ease-in-out infinite 6s; pointer-events: none; }
+        .content-pydantic { opacity: 0; animation: content-cycle 24s ease-in-out infinite 9s; pointer-events: none; }
+        .content-opentelemetry { opacity: 0; animation: content-cycle 24s ease-in-out infinite 12s; pointer-events: none; }
+        .content-redis { opacity: 0; animation: content-cycle 24s ease-in-out infinite 15s; pointer-events: none; }
+        .content-postgresql { opacity: 0; animation: content-cycle 24s ease-in-out infinite 18s; pointer-events: none; }
+        .content-github { opacity: 0; animation: content-cycle 24s ease-in-out infinite 21s; pointer-events: none; }
+
+        @keyframes content-cycle {
+            0%, 11.5% { opacity: 1; pointer-events: auto; }
+            12.5%, 98.5% { opacity: 0; pointer-events: none; }
+            100% { opacity: 1; pointer-events: auto; }
+        }
+    </style>
+
+    <!-- Section Title -->
+    <text x="20" y="20"
+          class="tech-stack-title"
+          font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="20"
+          font-weight="600"
+          letter-spacing="0em"
+          text-anchor="start">
+        Technology Stack
+    </text>
+
+    <!-- Technology Content: Python -->
+    <a xlink:href="https://www.python.org/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-python">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">Python</tspan>
+                <tspan class="tech-name-secondary" dx="8">3.13</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">Latest stable release</tspan>
+                <tspan class="tech-description"> with experimental </tspan>
+                <tspan class="tech-highlight">JIT compiler</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                and free-threaded mode for true parallel execution.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Enhanced REPL • Improved error messages • Type hints • Async/await
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: Django -->
+    <a xlink:href="https://www.djangoproject.com/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-django">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">Django</tspan>
+                <tspan class="tech-name-secondary" dx="8">5.2</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">Batteries-included</tspan>
+                <tspan class="tech-description"> Python web framework with built-in</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                ORM, admin interface, and enterprise-grade security features.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                MTV architecture • Async views • Middleware • Template engine
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: Django REST Framework -->
+    <a xlink:href="https://www.django-rest-framework.org/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-drf">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">Django REST Framework</tspan>
+                <tspan class="tech-name-secondary" dx="8">3.16</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">Industry-standard</tspan>
+                <tspan class="tech-description"> toolkit for building </tspan>
+                <tspan class="tech-highlight">RESTful APIs</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                with browsable API, authentication, and automatic serialization.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                ViewSets • JWT auth • Pagination • Filtering • Versioning
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: Pydantic -->
+    <a xlink:href="https://docs.pydantic.dev/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-pydantic">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">Pydantic</tspan>
+                <tspan class="tech-name-secondary" dx="8">2.11</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">Rust-powered</tspan>
+                <tspan class="tech-description"> data validation using Python </tspan>
+                <tspan class="tech-highlight">type hints</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                for robust data models with automatic JSON Schema generation.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Fastest validation • Strict mode • Custom validators • IDE support
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: OpenTelemetry -->
+    <a xlink:href="https://opentelemetry.io/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-opentelemetry">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">OpenTelemetry</tspan>
+                <tspan class="tech-name-secondary" dx="8">1.36</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">CNCF standard</tspan>
+                <tspan class="tech-description"> for observability with </tspan>
+                <tspan class="tech-highlight">distributed tracing</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                metrics, and logs across microservices and cloud-native apps.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Auto-instrumentation • Context propagation • Vendor-neutral • OTLP
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: Redis -->
+    <a xlink:href="https://redis.io/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-redis">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">Redis</tspan>
+                <tspan class="tech-name-secondary" dx="8">7.4</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">Ultra-fast</tspan>
+                <tspan class="tech-description"> in-memory data store with </tspan>
+                <tspan class="tech-highlight">vector database</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                capabilities for caching, sessions, and real-time AI applications.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Sub-millisecond latency • Pub/Sub • Lua scripting • Clustering
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: PostgreSQL -->
+    <a xlink:href="https://www.postgresql.org/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-postgresql">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">PostgreSQL</tspan>
+                <tspan class="tech-name-secondary" dx="8">16</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">World's most advanced</tspan>
+                <tspan class="tech-description"> open source database with</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                ACID compliance, JSONB support, and parallel query execution.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Full-text search • Window functions • CTEs • Logical replication
+            </text>
+        </g>
+    </a>
+
+    <!-- Technology Content: GitHub -->
+    <a xlink:href="https://github.com/" target="_blank" class="content-link">
+        <g transform="translate(500, 110)" class="content-github">
+            <text font-family="SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="40"
+                  font-weight="600"
+                  letter-spacing="-0.03em"
+                  text-anchor="middle">
+                <tspan class="tech-name-primary">GitHub</tspan>
+            </text>
+            <text y="45"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                <tspan class="tech-highlight">World's leading</tspan>
+                <tspan class="tech-description"> development platform for </tspan>
+                <tspan class="tech-highlight">version control</tspan>
+            </text>
+            <text y="70"
+                  class="tech-description"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="17"
+                  font-weight="400"
+                  letter-spacing="-0.022em"
+                  text-anchor="middle">
+                collaboration, CI/CD workflows, and open source contribution.
+            </text>
+            <text y="110"
+                  class="tech-features"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="14"
+                  font-weight="400"
+                  letter-spacing="-0.016em"
+                  text-anchor="middle">
+                Actions • Pull requests • Issues • Projects • Copilot integration
+            </text>
+        </g>
+    </a>
+
+    <!-- Tab Navigation Container -->
+    <g transform="translate(106, 300)">
+        <!-- Tab Navigation Background Platter -->
+        <rect class="tabnav-platter"
+              x="0" y="0"
+              width="783" height="52"
+              rx="26" ry="26"/>
+
+        <!-- Animated Sliding Indicator -->
+        <rect class="tabnav-indicator"
+              x="0" y="4"
+              width="91" height="44"
+              rx="22" ry="22"/>
+
+        <!-- Python Icon (Position: 51.5) -->
+        <g transform="translate(39.5, 14)">
+            <path class="icon-python"
+                  d="M23.328776785714286 9.086014285714286c-0.4042392857142857 -1.6221910714285712 -1.1707125 -2.8454035714285713 -2.803403571428571 -2.8454035714285713h-2.105180357142857v2.4884142857142857c0 1.9319357142857143 -1.6379410714285714 3.559382142857143 -3.5068767857142853 3.559382142857143H9.30650357142857c-1.5329464285714285 0 -2.803403571428571 1.3124517857142857 -2.803403571428571 2.8506535714285715v5.344312499999999c0 1.5224517857142856 1.3229571428571427 2.4149196428571424 2.803403571428571 2.8506535714285715 1.7744410714285714 0.5197339285714285 3.480632142857143 0.6142285714285715 5.606812499999999 0 1.4122017857142857 -0.40948392857142857 2.803403571428571 -1.2337071428571427 2.803403571428571 -2.8506535714285715v-2.136675H12.115157142857141v-0.7139732142857143h8.410216071428572c1.6326910714285714 0 2.236425 -1.1392125 2.803403571428571 -2.8454035714285713 0.5879785714285714 -1.7586910714285713 0.5617285714285714 -3.449132142857142 0 -5.701307142857143ZM15.26505 19.769399999999997c0.5827339285714286 0 1.055217857142857 0.47773392857142855 1.055217857142857 1.0657124999999998 0 0.5932285714285714 -0.4724839285714285 1.0709624999999998 -1.055217857142857 1.0709624999999998 -0.5774785714285714 0 -1.0552124999999999 -0.48297857142857137 -1.0552124999999999 -1.0709624999999998 0.00525 -0.5932285714285714 0.47773392857142855 -1.0657124999999998 1.0552124999999999 -1.0657124999999998ZM9.049264285714285 11.584928571428572H14.656071428571426c1.5591964285714286 0 2.803403571428571 -1.2862071428571429 2.803403571428571 -2.8506535714285715V3.3847125c0 -1.5224517857142856 -1.280957142857143 -2.6616589285714283 -2.803403571428571 -2.918903571428571 -1.879435714285714 -0.30973928571428566 -3.9216160714285717 -0.2939892857142857 -5.606807142857142 0.00525 -2.3729196428571426 0.4199839285714285 -2.803403571428571 1.2967071428571428 -2.803403571428571 2.918903571428571v2.136675h5.612057142857142v0.7139732142857143H4.140680357142856c-1.6326910714285714 0 -3.0606428571428568 0.981717857142857 -3.5068767857142853 2.8454035714285713 -0.5144839285714286 2.136680357142857 -0.5354839285714285 3.470132142857143 0 5.701307142857143 0.39898392857142856 1.6589410714285713 1.3492017857142855 2.8454035714285713 2.981898214285714 2.8454035714285713h1.926680357142857v-2.561914285714286c0 -1.853185714285714 1.6011964285714284 -3.4858821428571427 3.5068821428571426 -3.4858821428571427Zm-0.3517392857142857 -7.486242857142857c-0.5827285714285714 0 -1.0552124999999999 -0.47773392857142855 -1.0552124999999999 -1.0657124999999998 0.00525 -0.5932285714285714 0.4724839285714285 -1.0709624999999998 1.0552124999999999 -1.0709624999999998 0.5774785714285714 0 1.0552124999999999 0.48297857142857137 1.0552124999999999 1.0709624999999998s-0.4724839285714285 1.0657124999999998 -1.0552124999999999 1.0657124999999998Z"
+                  stroke-width="0.0536"/>
+        </g>
+
+        <!-- Django Icon (Position: 148.5) -->
+        <g transform="translate(136.5, 14)">
+            <path class="icon-django"
+                  d="M11.146 0h3.924v18.166c-2.013 0.382 -3.491 0.535 -5.096 0.535 -4.791 0 -7.288 -2.166 -7.288 -6.32 0 -4.002 2.65 -6.6 6.753 -6.6 0.637 0 1.121 0.05 1.707 0.203zm0 9.143a3.894 3.894 0 0 0 -1.325 -0.204c-1.988 0 -3.134 1.223 -3.134 3.365 0 2.09 1.096 3.236 3.109 3.236 0.433 0 0.79 -0.025 1.35 -0.102V9.142zM21.314 6.06v9.098c0 3.134 -0.229 4.638 -0.917 5.937 -0.637 1.249 -1.478 2.039 -3.211 2.905l-3.644 -1.733c1.733 -0.815 2.574 -1.53 3.109 -2.625 0.561 -1.121 0.739 -2.421 0.739 -5.835V6.059h3.924zM17.39 0.021h3.924v4.026H17.39z"
+                  stroke-width="1"/>
+        </g>
+
+        <!-- Django REST Framework Icon with Superscript (Position: 245.5) -->
+        <g transform="translate(233.5, 14)">
+            <path class="icon-drf"
+                  d="M11.146 0h3.924v18.166c-2.013 0.382 -3.491 0.535 -5.096 0.535 -4.791 0 -7.288 -2.166 -7.288 -6.32 0 -4.002 2.65 -6.6 6.753 -6.6 0.637 0 1.121 0.05 1.707 0.203zm0 9.143a3.894 3.894 0 0 0 -1.325 -0.204c-1.988 0 -3.134 1.223 -3.134 3.365 0 2.09 1.096 3.236 3.109 3.236 0.433 0 0.79 -0.025 1.35 -0.102V9.142zM21.314 6.06v9.098c0 3.134 -0.229 4.638 -0.917 5.937 -0.637 1.249 -1.478 2.039 -3.211 2.905l-3.644 -1.733c1.733 -0.815 2.574 -1.53 3.109 -2.625 0.561 -1.121 0.739 -2.421 0.739 -5.835V6.059h3.924zM17.39 0.021h3.924v4.026H17.39z"
+                  stroke-width="1"/>
+            <!-- REST Label -->
+            <text x="26" y="1"
+                  class="icon-drf"
+                  font-family="SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif"
+                  font-size="4.5"
+                  font-weight="600"
+                  opacity="0.7"
+                  text-anchor="start">REST</text>
+        </g>
+
+        <!-- Pydantic Icon (Position: 342.5) -->
+        <g transform="translate(330.5, 14)">
+            <path class="icon-pydantic"
+                  d="m23.826 17.316 -4.23 -5.866 -6.847 -9.496c-0.348 -0.48 -1.151 -0.48 -1.497 0l-6.845 9.494 -4.233 5.868a0.925 0.925 0 0 0 0.46 1.417l11.078 3.626h0.002a0.92 0.92 0 0 0 0.572 0h0.002l11.077 -3.626c0.28 -0.092 0.5 -0.31 0.59 -0.592a0.916 0.916 0 0 0 -0.13 -0.825h0.002ZM12.001 4.07l4.44 6.158 -4.152 -1.36c-0.032 -0.01 -0.066 -0.008 -0.098 -0.016a0.8 0.8 0 0 0 -0.096 -0.016c-0.032 -0.004 -0.062 -0.016 -0.094 -0.016s-0.062 0.012 -0.094 0.016a0.74 0.74 0 0 0 -0.096 0.016c-0.032 0.006 -0.066 0.006 -0.096 0.016L7.59 10.221l-0.026 0.008 4.44 -6.158h-0.002Zm-6.273 8.7 4.834 -1.583 0.516 -0.168v9.19L2.41 17.372l3.317 -4.6Zm7.197 7.437V11.02l5.35 1.752 3.316 4.598 -8.666 2.838Z"
+                  stroke-width="1"/>
+        </g>
+
+        <!-- OpenTelemetry Icon (Position: 439.5) -->
+        <g transform="translate(427.5, 14)">
+            <path class="icon-opentelemetry"
+                  d="M12.6974 13.1173c-1.0224 1.0224 -1.0224 2.68 0 3.7024 1.0224 1.0224 2.68 1.0224 3.7024 0 1.0224 -1.0223 1.0224 -2.68 0 -3.7024 -1.0223 -1.0223 -2.68 -1.0223 -3.7024 0zm2.7677 2.7701c-0.5063 0.5063 -1.3267 0.5063 -1.833 0s-0.5063 -1.3266 0 -1.833c0.5063 -0.5062 1.3267 -0.5062 1.833 0 0.5063 0.504 0.5063 1.3267 0 1.833zM16.356 0.2355l-1.6041 1.6042c-0.314 0.314 -0.314 0.83 0 1.144L21.015 9.247c0.314 0.314 0.83 0.314 1.144 0l1.6042 -1.6041c0.314 -0.314 0.314 -0.83 0 -1.144L17.4976 0.2354c-0.314 -0.314 -0.8276 -0.314 -1.1416 0zM5.1173 20.734c0.2848 -0.2848 0.2848 -0.7497 0 -1.0345l-0.8155 -0.8155c-0.2848 -0.2848 -0.7497 -0.2848 -1.0345 0l-1.6845 1.6845 -0.0024 0.0024 -0.4625 -0.4625c-0.2556 -0.2556 -0.6718 -0.2556 -0.925 0 -0.2556 0.2556 -0.2556 0.6718 0 0.925l2.775 2.775c0.2556 0.2556 0.6718 0.2556 0.925 0 0.2532 -0.2556 0.2556 -0.6718 0 -0.925l-0.4625 -0.4625 0.0024 -0.0024zm8.4856 -15.893 -3.5637 3.5637c-0.3164 0.3164 -0.3164 0.8374 0 1.1538l2.2006 2.2005c1.5554 -1.1197 3.7365 -0.981 5.1361 0.4187l1.7819 -1.7818c0.3164 -0.3165 0.3164 -0.8374 0 -1.1538l-4.401 -4.401c-0.3165 -0.319 -0.8374 -0.319 -1.1539 0zm-2.2881 7.8455 -1.2999 -1.2999c-0.3043 -0.3043 -0.8033 -0.3043 -1.1076 0l-4.5836 4.586c-0.3042 0.3043 -0.3042 0.8033 0 1.1076l2.5973 2.5973c0.3043 0.3043 0.8033 0.3043 1.1076 0l2.9478 -2.9527c-0.6231 -1.2877 -0.5112 -2.8431 0.3384 -4.0383z"
+                  stroke-width="1"/>
+        </g>
+
+        <!-- Redis Icon (Position: 536.5) -->
+        <g transform="translate(524.5, 14)">
+            <path class="icon-redis"
+                  d="M22.71 13.145c-1.66 2.092 -3.452 4.483 -7.038 4.483 -3.203 0 -4.397 -2.825 -4.48 -5.12 0.701 1.484 2.073 2.685 4.214 2.63 4.117 -0.133 6.94 -3.852 6.94 -7.239 0 -4.05 -3.022 -6.972 -8.268 -6.972 -3.752 0 -8.4 1.428 -11.455 3.685C2.59 6.937 3.885 9.958 4.35 9.626c2.648 -1.904 4.748 -3.13 6.784 -3.744C8.12 9.244 0.886 17.05 0 18.425c0.1 1.261 1.66 4.648 2.424 4.648 0.232 0 0.431 -0.133 0.664 -0.365a100.49 100.49 0 0 0 5.54 -6.765c0.222 3.104 1.748 6.898 6.014 6.898 3.819 0 7.604 -2.756 9.33 -8.965 0.2 -0.764 -0.73 -1.361 -1.261 -0.73zm-4.349 -5.013c0 1.959 -1.926 2.922 -3.685 2.922 -0.941 0 -1.664 -0.247 -2.235 -0.568 1.051 -1.592 2.092 -3.225 3.21 -4.973 1.972 0.334 2.71 1.43 2.71 2.619z"
+                  stroke-width="1"/>
+        </g>
+
+        <!-- PostgreSQL Icon (Position: 633.5) -->
+        <g transform="translate(621.5, 14)">
+            <path class="icon-postgresql"
+                  d="M23.5594 14.7228a0.5269 0.5269 0 0 0 -0.0563 -0.1191c-0.139 -0.2632 -0.4768 -0.3418 -1.0074 -0.2321 -1.6533 0.3411 -2.2935 0.1312 -2.5256 -0.0191 1.342 -2.0482 2.445 -4.522 3.0411 -6.8297 0.2714 -1.0507 0.7982 -3.5237 0.1222 -4.7316a1.5641 1.5641 0 0 0 -0.1509 -0.235C21.6931 0.9086 19.8007 0.0248 17.5099 0.0005c-1.4947 -0.0158 -2.7705 0.3461 -3.1161 0.4794a9.449 9.449 0 0 0 -0.5159 -0.0816 8.044 8.044 0 0 0 -1.3114 -0.1278c-1.1822 -0.0184 -2.2038 0.2642 -3.0498 0.8406 -0.8573 -0.3211 -4.7888 -1.645 -7.2219 0.0788C0.9359 2.1526 0.3086 3.8733 0.4302 6.3043c0.0409 0.818 0.5069 3.334 1.2423 5.7436 0.4598 1.5065 0.9387 2.7019 1.4334 3.582 0.553 0.9942 1.1259 1.5933 1.7143 1.7895 0.4474 0.1491 1.1327 0.1441 1.8581 -0.7279 0.8012 -0.9635 1.5903 -1.8258 1.9446 -2.2069 0.4351 0.2355 0.9064 0.3625 1.39 0.3772a0.0569 0.0569 0 0 0 0.0004 0.0041 11.0312 11.0312 0 0 0 -0.2472 0.3054c-0.3389 0.4302 -0.4094 0.5197 -1.5002 0.7443 -0.3102 0.064 -1.1344 0.2339 -1.1464 0.8115 -0.0025 0.1224 0.0329 0.2309 0.0919 0.3268 0.2269 0.4231 0.9216 0.6097 1.015 0.6331 1.3345 0.3335 2.5044 0.092 3.3714 -0.6787 -0.017 2.231 0.0775 4.4174 0.3454 5.0874 0.2212 0.5529 0.7618 1.9045 2.4692 1.9043 0.2505 0 0.5263 -0.0291 0.8296 -0.0941 1.7819 -0.3821 2.5557 -1.1696 2.855 -2.9059 0.1503 -0.8707 0.4016 -2.8753 0.5388 -4.1012 0.0169 -0.0703 0.0357 -0.1207 0.057 -0.1362 0.0007 -0.0005 0.0697 -0.0471 0.4272 0.0307a0.3673 0.3673 0 0 0 0.0443 0.0068l0.2539 0.0223 0.0149 0.001c0.8468 0.0384 1.9114 -0.1426 2.5312 -0.4308 0.6438 -0.2988 1.8057 -1.0323 1.5951 -1.6698z"
+                  stroke-width="1"/>
+        </g>
+
+        <!-- GitHub Icon (Position: 730.5) -->
+        <g transform="translate(718.5, 14)">
+            <path class="icon-github"
+                  d="M12 0.297c-6.63 0 -12 5.373 -12 12 0 5.303 3.438 9.8 8.205 11.385 0.6 0.113 0.82 -0.258 0.82 -0.577 0 -0.285 -0.01 -1.04 -0.015 -2.04 -3.338 0.724 -4.042 -1.61 -4.042 -1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087 -0.744 0.084 -0.729 0.084 -0.729 1.205 0.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495 0.998 0.108 -0.776 0.417 -1.305 0.76 -1.605 -2.665 -0.3 -5.466 -1.332 -5.466 -5.93 0 -1.31 0.465 -2.38 1.235 -3.22 -0.135 -0.303 -0.54 -1.523 0.105 -3.176 0 0 1.005 -0.322 3.3 1.23 0.96 -0.267 1.98 -0.399 3 -0.405 1.02 0.006 2.04 0.138 3 0.405 2.28 -1.552 3.285 -1.23 3.285 -1.23 0.645 1.653 0.24 2.873 0.12 3.176 0.765 0.84 1.23 1.91 1.23 3.22 0 4.61 -2.805 5.625 -5.475 5.92 0.42 0.36 0.81 1.096 0.81 2.22 0 1.606 -0.015 2.896 -0.015 3.286 0 0.315 0.21 0.69 0.825 0.57C20.565 22.092 24 17.592 24 12.297c0 -6.627 -5.373 -12 -12 -12"
+                  stroke-width="1"/>
+        </g>
+    </g>
+
+</svg>

@@ -1,0 +1,205 @@
+# Copyright © 2025 Leviftas authors. All rights reserved.
+#
+# Licensed under the GNU General Public License v3.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/gpl-3.0.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# bug_report.yml
+#
+# Leviftas project issues Bug template.
+#
+# - Author   : FrostLeo <frostleo.dev@gmail.com>
+# - Created  : 2025/10/31
+# - Modified : 2025/10/31
+
+name: Bug Report
+description: |
+  Report any bugs you encounter while using the project to help us improve and enhance it.
+title: "[Bug]: "
+labels:
+  - type-bug
+body:
+  - type: textarea
+    id: report-header
+    attributes:
+      label: "‎"
+      description: "For display only, please do not modify"
+      value: |
+        <img src="https://frost-leo.github.io/Leviftas/assets/images/github/issues/bug-report/header.svg" alt="Bug Report" width="100%">
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > **Before submitting this bug report, please confirm all items below:**
+
+  - type: checkboxes
+    id: before-confirming
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: There are no existing issues with the same or similar issue
+          required: true
+        - label: I have read the relevant project documentation
+          required: true
+        - label: I have updated to the latest version of Leviftas
+          required: true
+    validations:
+      required: true
+
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: |
+        Please provide a clear and concise description of the bug.
+      placeholder: |
+        Describe what happened and what you were trying to do when the bug occurred.
+        The more details you provide, the better we can understand and fix the issue.
+        
+        For code snippets, please use code blocks like this:
+        
+        ```python
+        # Your code here
+        ```
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: textarea
+    id: bug-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        Please provide detailed steps to reproduce the bug.
+      placeholder: |
+        1. Step one...
+        2. Step two...
+        3. Step three...
+        4. Bug occurs
+        
+        Attach any relevant screenshots if applicable.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+  - type: checkboxes
+    id: operating-systems
+    attributes:
+      label: Operating Systems
+      description: |
+        Please provide us with the information about the operating system you are using.
+      options:
+        - label: Linux
+        - label: MacOS
+        - label: Windows
+
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python Version
+      description: |
+        Please select your Python version.
+      options:
+        - "3.14"
+        - "3.13"
+        - "3.12"
+        - "3.11"
+        - "3.10"
+        - "3.9"
+        - "3.8"
+    validations:
+      required: true
+
+  - type: input
+    id: leviftas-version
+    attributes:
+      label: Leviftas Version
+      description: |
+        Please enter the Leviftas version you're using (e.g., 0.1.0)
+      placeholder: "e.g., 0.1.0"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: |
+        Please paste any relevant log output here. This will help us diagnose the issue.
+      value: |
+        ```console
+        
+        ```
+      render: console
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: |
+        Any additional information that might help us understand and fix the bug.
+      placeholder: |
+        - Environment details
+        - Configuration files
+        - Related issues or discussions
+        - Workarounds you've tried
+        - Any other relevant context
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        > [!TIP]
+        > Link any related discussions, issues, or PRs to provide better context for this issue.
+
+  - type: textarea
+    id: related-links
+    attributes:
+      label: Related Links
+      description: |
+        Links to previous discussions, related issues, or pull requests about this feature.
+      placeholder: |
+        - Refs #NNNN
+    validations:
+      required: false
+        

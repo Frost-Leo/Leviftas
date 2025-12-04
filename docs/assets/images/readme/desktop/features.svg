@@ -1,0 +1,601 @@
+<!--
+Copyright © 2025 Leviftas authors. All rights reserved.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+features.svg
+
+Interactive feature showcase with animated expandable cards and flowing logo visualization.
+Features progressive disclosure animations for three core capabilities with synchronized
+transitions. Includes an animated Leviftas logo with flowing particle effects.
+Supports responsive dark/light mode with smooth color transitions.
+
+- Author   : FrostLeo <frostleo.dev@gmail.com>
+- Created  : 2025/10/31
+- Modified : 2025/10/31
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%"
+     viewBox="0 0 1200 650"
+     preserveAspectRatio="xMidYMid meet"
+     style="background-color:transparent">
+
+    <!-- Responsive Styles and Animations -->
+    <style>
+        /* Dark Mode Color Scheme */
+        @media (prefers-color-scheme: dark) {
+            .features-title { fill: #F5F5F7; }
+            .item-label { fill: #F5F5F7; }
+            .item-title { fill: #F5F5F7; }
+            .item-description { fill: #A1A1A6; }
+            .plus-circle { stroke: #86868B; fill: none; }
+            .plus-icon { stroke: #86868B; }
+            .item-bg { fill: rgba(29, 29, 31, 0.72); }
+            .code-snippet { fill: #94A3B8; font-family: 'SF Mono', monospace; font-size: 12px; }
+        }
+
+        /* Light Mode Color Scheme */
+        @media (prefers-color-scheme: light) {
+            .features-title { fill: #1D1D1F; }
+            .item-label { fill: #1D1D1F; }
+            .item-title { fill: #1D1D1F; }
+            .item-description { fill: #86868B; }
+            .plus-circle { stroke: #1D1D1F; fill: none; opacity: 0.4; }
+            .plus-icon { stroke: #1D1D1F; opacity: 0.4; }
+            .item-bg { fill: rgba(232, 232, 237, 0.72); }
+            .code-snippet { fill: #64748B; font-family: 'SF Mono', monospace; font-size: 12px; }
+        }
+
+        /* Flow animation styles for logo paths */
+        @keyframes flowAnimation1 {
+            0% {stroke-dashoffset: 1500}
+            100% {stroke-dashoffset: 0}
+        }
+        @keyframes flowAnimation2 {
+            0% {stroke-dashoffset: 1500}
+            100% {stroke-dashoffset: 0}
+        }
+        @keyframes flowAnimation3 {
+            0% {stroke-dashoffset: 1500}
+            100% {stroke-dashoffset: 0}
+        }
+        .flow-path1 {
+            animation: flowAnimation1 2s linear infinite;
+        }
+        .flow-path2 {
+            animation: flowAnimation2 2s linear infinite;
+        }
+        .flow-path3 {
+            animation: flowAnimation3 2s linear infinite;
+        }
+    </style>
+
+    <!-- Left Section: Features List (60% width) -->
+    <g id="features-section">
+        <!-- Section Title -->
+        <text x="30" y="45"
+              class="features-title"
+              font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif"
+              font-size="24"
+              font-weight="600"
+              letter-spacing="0em"
+              text-anchor="start">
+            Features
+        </text>
+
+        <!-- Feature Item 1: Distributed Services -->
+        <g id="item-1" transform="translate(50, 100)">
+            <!-- Expandable background with smooth animation -->
+            <rect class="item-bg"
+                  x="-16" y="-16"
+                  width="240" height="56"
+                  rx="28" ry="28">
+                <!-- Width expansion animation -->
+                <animate attributeName="width"
+                         values="240;240;240;500"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="0.5s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                <!-- Height expansion animation -->
+                <animate attributeName="height"
+                         values="56;56;56;140"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="0.5s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+            </rect>
+
+            <!-- Collapsed state: Plus icon and label -->
+            <g id="collapsed-content-1">
+                <!-- Plus icon circle -->
+                <circle cx="12" cy="12" r="11.3"
+                        class="plus-circle"
+                        stroke-width="1.5">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="0.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </circle>
+                <!-- Plus icon cross -->
+                <path d="M 12 7 L 12 17 M 7 12 L 17 12"
+                      class="plus-icon"
+                      stroke-width="2"
+                      stroke-linecap="round">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="0.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </path>
+                <!-- Feature label -->
+                <text x="35" y="17"
+                      class="item-label"
+                      font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                      font-size="17"
+                      font-weight="400"
+                      letter-spacing="-0.022em">
+                    Distributed Services
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="0.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </text>
+            </g>
+
+            <!-- Expanded state: Full content -->
+            <g id="expanded-content-1" opacity="0">
+                <animate attributeName="opacity"
+                         values="0;0;1"
+                         keyTimes="0;0.5;1"
+                         begin="0.5s"
+                         dur="0.8s"
+                         fill="freeze"/>
+
+                <g transform="translate(10, 15)">
+                    <!-- Feature title -->
+                    <text x="0" y="0"
+                          class="item-title"
+                          font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="18"
+                          font-weight="600">
+                        Distributed Services
+                    </text>
+
+                    <!-- Feature description with staggered line animations -->
+                    <text x="0" y="30"
+                          class="item-description"
+                          font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="14">
+                        <tspan x="0" dy="0" opacity="0">
+                            Seamlessly scale applications across multiple nodes with
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="1.0s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            built-in load balancing and service discovery. Ensures
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="1.1s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            high availability and optimal performance across your
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="1.2s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            distributed infrastructure with automatic failover.
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="1.3s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+
+        <!-- Feature Item 2: Security First Architecture -->
+        <g id="item-2" transform="translate(50, 162)">
+            <!-- Position animation to move down when item 1 expands -->
+            <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="50,162;50,162;50,246"
+                keyTimes="0;0.5;1"
+                begin="0.5s"
+                dur="0.8s"
+                fill="freeze"
+                additive="replace"
+                calcMode="spline"
+                keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+
+            <!-- Expandable background -->
+            <rect class="item-bg"
+                  x="-16" y="-16"
+                  width="240" height="56"
+                  rx="28" ry="28">
+                <!-- Width expansion animation -->
+                <animate attributeName="width"
+                         values="240;240;240;500"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="2.0s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                <!-- Height expansion animation -->
+                <animate attributeName="height"
+                         values="56;56;56;160"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="2.0s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+            </rect>
+
+            <!-- Collapsed state content -->
+            <g id="collapsed-content-2">
+                <!-- Plus icon circle -->
+                <circle cx="12" cy="12" r="11.3"
+                        class="plus-circle"
+                        stroke-width="1.5">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="2.0s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </circle>
+                <!-- Plus icon cross -->
+                <path d="M 12 7 L 12 17 M 7 12 L 17 12"
+                      class="plus-icon"
+                      stroke-width="2"
+                      stroke-linecap="round">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="2.0s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </path>
+                <!-- Feature label -->
+                <text x="35" y="17"
+                      class="item-label"
+                      font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                      font-size="17"
+                      font-weight="400">
+                    Security First
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="2.0s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </text>
+            </g>
+
+            <!-- Expanded state content -->
+            <g id="expanded-content-2" opacity="0">
+                <animate attributeName="opacity"
+                         values="0;0;1"
+                         keyTimes="0;0.5;1"
+                         begin="2.0s"
+                         dur="0.8s"
+                         fill="freeze"/>
+
+                <g transform="translate(10, 15)">
+                    <!-- Feature title -->
+                    <text x="0" y="0"
+                          class="item-title"
+                          font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="18"
+                          font-weight="600">
+                        Security First Architecture
+                    </text>
+
+                    <!-- Feature description with staggered animations -->
+                    <text x="0" y="30"
+                          class="item-description"
+                          font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="14">
+                        <tspan x="0" dy="0" opacity="0">
+                            Comprehensive use of Pydantic for runtime type validation
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="2.5s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            and data models. All inputs and outputs are validated
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="2.6s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            automatically. Integrated Logfire monitoring tracks all
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="2.7s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            data model operations for security and performance insights.
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="2.8s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                    </text>
+
+                    <!-- Code snippet example -->
+                    <text x="0" y="115" class="code-snippet" opacity="0">
+                        @validator • @field_validator • Logfire.observe()
+                        <animate attributeName="opacity"
+                                 values="0;1"
+                                 begin="2.9s"
+                                 dur="0.3s"
+                                 fill="freeze"/>
+                    </text>
+                </g>
+            </g>
+        </g>
+
+        <!-- Feature Item 3: Modular Design -->
+        <g id="item-3" transform="translate(50, 224)">
+            <!-- Multi-stage position animation -->
+            <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="50,224;50,224;50,308"
+                keyTimes="0;0.5;1"
+                begin="0.5s"
+                dur="0.8s"
+                fill="freeze"
+                calcMode="spline"
+                keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+            <!-- Second push down when item 2 expands -->
+            <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="50,308;50,308;50,412"
+                keyTimes="0;0.5;1"
+                begin="2.0s"
+                dur="0.8s"
+                fill="freeze"
+                additive="replace"
+                calcMode="spline"
+                keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+
+            <!-- Expandable background -->
+            <rect class="item-bg"
+                  x="-16" y="-16"
+                  width="240" height="56"
+                  rx="28" ry="28">
+                <!-- Width expansion animation -->
+                <animate attributeName="width"
+                         values="240;240;240;500"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="3.5s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                <!-- Height expansion animation -->
+                <animate attributeName="height"
+                         values="56;56;56;140"
+                         keyTimes="0;0.33;0.5;1"
+                         begin="3.5s"
+                         dur="0.8s"
+                         fill="freeze"
+                         calcMode="spline"
+                         keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+            </rect>
+
+            <!-- Collapsed state content -->
+            <g id="collapsed-content-3">
+                <!-- Plus icon circle -->
+                <circle cx="12" cy="12" r="11.3"
+                        class="plus-circle"
+                        stroke-width="1.5">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="3.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </circle>
+                <!-- Plus icon cross -->
+                <path d="M 12 7 L 12 17 M 7 12 L 17 12"
+                      class="plus-icon"
+                      stroke-width="2"
+                      stroke-linecap="round">
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="3.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </path>
+                <!-- Feature label -->
+                <text x="35" y="17"
+                      class="item-label"
+                      font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                      font-size="17"
+                      font-weight="400">
+                    Modular Design
+                    <animate attributeName="opacity"
+                             values="1;1;0"
+                             keyTimes="0;0.4;1"
+                             begin="3.5s"
+                             dur="0.6s"
+                             fill="freeze"/>
+                </text>
+            </g>
+
+            <!-- Expanded state content -->
+            <g id="expanded-content-3" opacity="0">
+                <animate attributeName="opacity"
+                         values="0;0;1"
+                         keyTimes="0;0.5;1"
+                         begin="3.5s"
+                         dur="0.8s"
+                         fill="freeze"/>
+
+                <g transform="translate(10, 15)">
+                    <!-- Feature title -->
+                    <text x="0" y="0"
+                          class="item-title"
+                          font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="18"
+                          font-weight="600">
+                        Modular Django Apps
+                    </text>
+
+                    <!-- Feature description with staggered animations -->
+                    <text x="0" y="30"
+                          class="item-description"
+                          font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif"
+                          font-size="14">
+                        <tspan x="0" dy="0" opacity="0">
+                            Leveraging Django's app architecture for true modularity.
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="4.0s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            Each application can be deployed independently, tested
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="4.1s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            in isolation, and scaled according to specific needs.
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="4.2s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                        <tspan x="0" dy="20" opacity="0">
+                            Clean separation of concerns and reusable components.
+                            <animate attributeName="opacity"
+                                     values="0;1"
+                                     begin="4.3s"
+                                     dur="0.3s"
+                                     fill="freeze"/>
+                        </tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+
+    <!-- Right Section: Animated Leviftas Logo (40% width) -->
+    <g id="logo-section" transform="translate(750, 150) scale(0.32)">
+
+        <!-- Background logo outline with fade-in -->
+        <path d="M667.870850,412.600464 C667.205811,407.826508 669.276978,404.450500 671.943726,401.355316 C673.271973,399.813690 674.843079,398.345612 674.064148,396.125397 C673.184143,393.617432 670.812744,394.107574 668.913330,394.200134 C641.148804,395.552765 613.321106,396.208710 585.646606,398.617645 C564.354858,400.470978 547.807861,411.923523 534.861328,428.899384 C528.550842,437.173920 525.567810,446.865845 521.650574,456.171875 C517.025391,467.159821 512.763916,478.301544 508.388702,489.393921 C504.078796,500.320648 499.823730,511.268982 495.663971,521.902588 C497.330994,524.326599 499.341705,523.632690 501.062683,523.690186 C525.207153,524.496521 549.349121,525.496826 573.517334,524.980347 C578.489807,524.874023 583.386108,525.853210 588.451782,525.073730 C598.108459,523.587830 607.268433,516.199524 610.022644,506.847229 C613.005432,496.718964 613.005371,496.718994 623.584229,496.701019 C636.182007,496.679626 636.275024,497.092926 631.772949,508.971405 C625.477539,525.581116 619.450928,542.296875 613.612610,559.072937 C612.018433,563.653442 609.477356,564.982361 604.790161,565.057434 C564.979004,565.695068 525.171814,566.577881 485.363708,567.405029 C476.864868,567.581604 475.700134,568.834839 472.507202,577.587341 C468.646149,588.171326 464.349426,598.597778 460.169250,609.063660 C454.074585,624.322693 447.947266,639.568787 441.774475,654.796387 C436.534088,667.723816 431.214111,680.619019 425.920807,693.525024 C421.391815,704.567444 417.096924,715.704468 412.710785,726.797913 C408.746857,736.823486 404.081299,746.625122 400.425476,756.771973 C396.260986,768.330627 390.258545,779.145081 386.983704,791.050659 C385.847992,795.179504 383.550964,797.537048 378.412445,797.479248 C351.918213,797.181091 325.418884,797.332581 298.921356,797.326233 C298.088165,797.326050 297.254913,797.320740 296.421844,797.308228 C294.853424,797.284729 293.276703,797.065735 292.849579,795.270142 C292.417969,793.455505 293.797180,792.547119 295.155212,791.850891 C299.000061,789.880005 302.884430,787.986389 306.744019,786.044128 C321.354919,778.690979 332.770569,767.647095 342.421173,754.695862 C351.556976,742.435486 356.784943,728.235596 362.101562,714.072876 C365.721649,704.429443 369.841095,694.973633 373.723724,685.428406 C379.664948,670.822083 385.488007,656.166565 391.563324,641.616333 C396.236176,630.424927 400.231171,618.971375 405.164490,607.873596 C409.191833,598.813904 412.540039,589.440979 415.906647,580.104919 C417.135010,576.698547 419.910065,573.939636 420.105927,570.029236 C418.004333,568.371094 415.571289,568.981689 413.358398,568.988831 C386.362366,569.075806 359.352875,568.774292 332.374512,569.544128 C300.881775,570.442871 269.396118,569.722778 237.910736,570.149719 C231.145966,570.241455 230.529099,569.632629 231.893158,563.040100 C234.090881,552.418701 234.015976,541.551575 235.654877,530.867432 C236.287689,526.742188 237.527573,524.198669 242.171967,524.864990 C263.900391,527.982422 278.569794,515.564392 292.733734,501.953400 C304.484985,490.660889 311.398682,476.400665 318.163391,461.899933 C325.319489,446.560333 333.341644,431.627228 340.786560,416.419159 C348.001495,401.680664 354.888184,386.781769 362.061523,372.022552 C367.437500,360.961334 373.106750,350.042999 378.523132,339.001068 C384.743927,326.319305 390.764709,313.539337 396.996887,300.863251 C401.247864,292.216919 405.791962,283.714905 410.060425,275.076904 C415.047333,264.984985 419.866882,254.810455 424.780579,244.682205 C426.465057,241.210175 425.122650,239.551865 421.565887,239.556610 C417.574066,239.561920 413.582977,239.864578 409.590881,240.020309 C406.275238,240.149673 404.962341,239.121857 405.373993,235.283524 C406.636566,223.511810 409.183319,211.967041 410.931030,200.289902 C412.085785,192.574738 412.754150,184.794388 414.303131,177.122665 C414.920288,174.066177 416.261963,172.977280 419.316925,173.007355 C458.303192,173.391052 497.308350,172.032028 536.273621,173.786972 C551.016113,174.450974 563.136841,181.236313 572.518066,192.667984 C571.415955,195.013336 569.404846,195.098770 567.735168,195.542633 C546.134277,201.284912 527.092285,211.969376 510.503601,226.657227 C494.103607,241.177948 480.716156,258.119080 471.682068,278.432281 C466.087158,291.012482 458.989838,302.916840 452.825073,315.253571 C447.492188,325.925598 442.608887,336.821350 437.373169,347.543121 C429.791473,363.068909 422.032440,378.508057 414.421112,394.019501 C406.962585,409.219513 399.608337,424.470612 392.182007,439.686462 C385.343536,453.697845 378.495178,467.704468 371.604431,481.690186 C365.807770,493.455292 359.868042,505.150513 354.148193,516.952515 C351.961182,521.465027 352.757721,522.648254 357.720062,522.657288 C383.384186,522.703796 409.048492,522.647034 434.712555,522.707153 C438.203033,522.715332 439.767151,521.249573 441.267700,518.001892 C446.152557,507.429657 449.736938,496.352386 454.479065,485.717438 C460.554932,472.091492 465.471741,457.953339 471.138000,444.138489 C474.851715,435.084137 479.345398,426.347748 481.632202,416.742676 C484.627533,404.161774 480.833496,393.435120 472.613525,384.017975 C468.403961,379.195343 463.444214,375.021210 459.880188,369.926971 C461.014526,367.442749 462.852051,367.728180 464.433624,367.704010 C492.589264,367.273804 520.682800,365.443420 548.786316,363.898132 C573.741821,362.525940 598.721863,362.186371 623.693054,361.421539 C655.808960,360.437866 687.856567,357.596558 720.025940,357.567719 C725.262756,357.563049 729.148743,358.817413 731.458923,363.604858 C733.546265,367.930573 732.451050,375.412476 728.886902,378.899506 C714.745789,392.734436 700.484253,406.446198 686.270020,420.206482 C683.143433,423.233246 679.716187,423.594696 676.469727,420.711212 C673.610901,418.171997 668.679077,417.885223 667.870850,412.600464 z"
+              fill="none"
+              stroke="#333333"
+              stroke-width="2"
+              opacity="0.1">
+            <animate attributeName="opacity"
+                     values="0;0.1"
+                     begin="0.5s"
+                     dur="1s"
+                     fill="freeze"/>
+        </path>
+
+        <!-- Flow Line Effect Layer 1: Primary flow path -->
+        <path class="flow-path1"
+              d="M667.870850,412.600464 C667.205811,407.826508 669.276978,404.450500 671.943726,401.355316 C673.271973,399.813690 674.843079,398.345612 674.064148,396.125397 C673.184143,393.617432 670.812744,394.107574 668.913330,394.200134 C641.148804,395.552765 613.321106,396.208710 585.646606,398.617645 C564.354858,400.470978 547.807861,411.923523 534.861328,428.899384 C528.550842,437.173920 525.567810,446.865845 521.650574,456.171875 C517.025391,467.159821 512.763916,478.301544 508.388702,489.393921 C504.078796,500.320648 499.823730,511.268982 495.663971,521.902588 C497.330994,524.326599 499.341705,523.632690 501.062683,523.690186 C525.207153,524.496521 549.349121,525.496826 573.517334,524.980347 C578.489807,524.874023 583.386108,525.853210 588.451782,525.073730 C598.108459,523.587830 607.268433,516.199524 610.022644,506.847229 C613.005432,496.718964 613.005371,496.718994 623.584229,496.701019 C636.182007,496.679626 636.275024,497.092926 631.772949,508.971405 C625.477539,525.581116 619.450928,542.296875 613.612610,559.072937 C612.018433,563.653442 609.477356,564.982361 604.790161,565.057434 C564.979004,565.695068 525.171814,566.577881 485.363708,567.405029 C476.864868,567.581604 475.700134,568.834839 472.507202,577.587341 C468.646149,588.171326 464.349426,598.597778 460.169250,609.063660 C454.074585,624.322693 447.947266,639.568787 441.774475,654.796387 C436.534088,667.723816 431.214111,680.619019 425.920807,693.525024 C421.391815,704.567444 417.096924,715.704468 412.710785,726.797913 C408.746857,736.823486 404.081299,746.625122 400.425476,756.771973 C396.260986,768.330627 390.258545,779.145081 386.983704,791.050659 C385.847992,795.179504 383.550964,797.537048 378.412445,797.479248 C351.918213,797.181091 325.418884,797.332581 298.921356,797.326233 C298.088165,797.326050 297.254913,797.320740 296.421844,797.308228 C294.853424,797.284729 293.276703,797.065735 292.849579,795.270142 C292.417969,793.455505 293.797180,792.547119 295.155212,791.850891 C299.000061,789.880005 302.884430,787.986389 306.744019,786.044128 C321.354919,778.690979 332.770569,767.647095 342.421173,754.695862 C351.556976,742.435486 356.784943,728.235596 362.101562,714.072876 C365.721649,704.429443 369.841095,694.973633 373.723724,685.428406 C379.664948,670.822083 385.488007,656.166565 391.563324,641.616333 C396.236176,630.424927 400.231171,618.971375 405.164490,607.873596 C409.191833,598.813904 412.540039,589.440979 415.906647,580.104919 C417.135010,576.698547 419.910065,573.939636 420.105927,570.029236 C418.004333,568.371094 415.571289,568.981689 413.358398,568.988831 C386.362366,569.075806 359.352875,568.774292 332.374512,569.544128 C300.881775,570.442871 269.396118,569.722778 237.910736,570.149719 C231.145966,570.241455 230.529099,569.632629 231.893158,563.040100 C234.090881,552.418701 234.015976,541.551575 235.654877,530.867432 C236.287689,526.742188 237.527573,524.198669 242.171967,524.864990 C263.900391,527.982422 278.569794,515.564392 292.733734,501.953400 C304.484985,490.660889 311.398682,476.400665 318.163391,461.899933 C325.319489,446.560333 333.341644,431.627228 340.786560,416.419159 C348.001495,401.680664 354.888184,386.781769 362.061523,372.022552 C367.437500,360.961334 373.106750,350.042999 378.523132,339.001068 C384.743927,326.319305 390.764709,313.539337 396.996887,300.863251 C401.247864,292.216919 405.791962,283.714905 410.060425,275.076904 C415.047333,264.984985 419.866882,254.810455 424.780579,244.682205 C426.465057,241.210175 425.122650,239.551865 421.565887,239.556610 C417.574066,239.561920 413.582977,239.864578 409.590881,240.020309 C406.275238,240.149673 404.962341,239.121857 405.373993,235.283524 C406.636566,223.511810 409.183319,211.967041 410.931030,200.289902 C412.085785,192.574738 412.754150,184.794388 414.303131,177.122665 C414.920288,174.066177 416.261963,172.977280 419.316925,173.007355 C458.303192,173.391052 497.308350,172.032028 536.273621,173.786972 C551.016113,174.450974 563.136841,181.236313 572.518066,192.667984 C571.415955,195.013336 569.404846,195.098770 567.735168,195.542633 C546.134277,201.284912 527.092285,211.969376 510.503601,226.657227 C494.103607,241.177948 480.716156,258.119080 471.682068,278.432281 C466.087158,291.012482 458.989838,302.916840 452.825073,315.253571 C447.492188,325.925598 442.608887,336.821350 437.373169,347.543121 C429.791473,363.068909 422.032440,378.508057 414.421112,394.019501 C406.962585,409.219513 399.608337,424.470612 392.182007,439.686462 C385.343536,453.697845 378.495178,467.704468 371.604431,481.690186 C365.807770,493.455292 359.868042,505.150513 354.148193,516.952515 C351.961182,521.465027 352.757721,522.648254 357.720062,522.657288 C383.384186,522.703796 409.048492,522.647034 434.712555,522.707153 C438.203033,522.715332 439.767151,521.249573 441.267700,518.001892 C446.152557,507.429657 449.736938,496.352386 454.479065,485.717438 C460.554932,472.091492 465.471741,457.953339 471.138000,444.138489 C474.851715,435.084137 479.345398,426.347748 481.632202,416.742676 C484.627533,404.161774 480.833496,393.435120 472.613525,384.017975 C468.403961,379.195343 463.444214,375.021210 459.880188,369.926971 C461.014526,367.442749 462.852051,367.728180 464.433624,367.704010 C492.589264,367.273804 520.682800,365.443420 548.786316,363.898132 C573.741821,362.525940 598.721863,362.186371 623.693054,361.421539 C655.808960,360.437866 687.856567,357.596558 720.025940,357.567719 C725.262756,357.563049 729.148743,358.817413 731.458923,363.604858 C733.546265,367.930573 732.451050,375.412476 728.886902,378.899506 C714.745789,392.734436 700.484253,406.446198 686.270020,420.206482 C683.143433,423.233246 679.716187,423.594696 676.469727,420.711212 C673.610901,418.171997 668.679077,417.885223 667.870850,412.600464 z"
+              fill="none"
+              stroke="#007AFF"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-dasharray="600,900"
+              opacity="0">
+            <animate attributeName="opacity"
+                     values="0;1"
+                     begin="1s"
+                     dur="1s"
+                     fill="freeze"/>
+        </path>
+
+        <!-- Flow Line Effect Layer 2: Secondary flow path -->
+        <path class="flow-path2"
+              d="M667.870850,412.600464 C667.205811,407.826508 669.276978,404.450500 671.943726,401.355316 C673.271973,399.813690 674.843079,398.345612 674.064148,396.125397 C673.184143,393.617432 670.812744,394.107574 668.913330,394.200134 C641.148804,395.552765 613.321106,396.208710 585.646606,398.617645 C564.354858,400.470978 547.807861,411.923523 534.861328,428.899384 C528.550842,437.173920 525.567810,446.865845 521.650574,456.171875 C517.025391,467.159821 512.763916,478.301544 508.388702,489.393921 C504.078796,500.320648 499.823730,511.268982 495.663971,521.902588 C497.330994,524.326599 499.341705,523.632690 501.062683,523.690186 C525.207153,524.496521 549.349121,525.496826 573.517334,524.980347 C578.489807,524.874023 583.386108,525.853210 588.451782,525.073730 C598.108459,523.587830 607.268433,516.199524 610.022644,506.847229 C613.005432,496.718964 613.005371,496.718994 623.584229,496.701019 C636.182007,496.679626 636.275024,497.092926 631.772949,508.971405 C625.477539,525.581116 619.450928,542.296875 613.612610,559.072937 C612.018433,563.653442 609.477356,564.982361 604.790161,565.057434 C564.979004,565.695068 525.171814,566.577881 485.363708,567.405029 C476.864868,567.581604 475.700134,568.834839 472.507202,577.587341 C468.646149,588.171326 464.349426,598.597778 460.169250,609.063660 C454.074585,624.322693 447.947266,639.568787 441.774475,654.796387 C436.534088,667.723816 431.214111,680.619019 425.920807,693.525024 C421.391815,704.567444 417.096924,715.704468 412.710785,726.797913 C408.746857,736.823486 404.081299,746.625122 400.425476,756.771973 C396.260986,768.330627 390.258545,779.145081 386.983704,791.050659 C385.847992,795.179504 383.550964,797.537048 378.412445,797.479248 C351.918213,797.181091 325.418884,797.332581 298.921356,797.326233 C298.088165,797.326050 297.254913,797.320740 296.421844,797.308228 C294.853424,797.284729 293.276703,797.065735 292.849579,795.270142 C292.417969,793.455505 293.797180,792.547119 295.155212,791.850891 C299.000061,789.880005 302.884430,787.986389 306.744019,786.044128 C321.354919,778.690979 332.770569,767.647095 342.421173,754.695862 C351.556976,742.435486 356.784943,728.235596 362.101562,714.072876 C365.721649,704.429443 369.841095,694.973633 373.723724,685.428406 C379.664948,670.822083 385.488007,656.166565 391.563324,641.616333 C396.236176,630.424927 400.231171,618.971375 405.164490,607.873596 C409.191833,598.813904 412.540039,589.440979 415.906647,580.104919 C417.135010,576.698547 419.910065,573.939636 420.105927,570.029236 C418.004333,568.371094 415.571289,568.981689 413.358398,568.988831 C386.362366,569.075806 359.352875,568.774292 332.374512,569.544128 C300.881775,570.442871 269.396118,569.722778 237.910736,570.149719 C231.145966,570.241455 230.529099,569.632629 231.893158,563.040100 C234.090881,552.418701 234.015976,541.551575 235.654877,530.867432 C236.287689,526.742188 237.527573,524.198669 242.171967,524.864990 C263.900391,527.982422 278.569794,515.564392 292.733734,501.953400 C304.484985,490.660889 311.398682,476.400665 318.163391,461.899933 C325.319489,446.560333 333.341644,431.627228 340.786560,416.419159 C348.001495,401.680664 354.888184,386.781769 362.061523,372.022552 C367.437500,360.961334 373.106750,350.042999 378.523132,339.001068 C384.743927,326.319305 390.764709,313.539337 396.996887,300.863251 C401.247864,292.216919 405.791962,283.714905 410.060425,275.076904 C415.047333,264.984985 419.866882,254.810455 424.780579,244.682205 C426.465057,241.210175 425.122650,239.551865 421.565887,239.556610 C417.574066,239.561920 413.582977,239.864578 409.590881,240.020309 C406.275238,240.149673 404.962341,239.121857 405.373993,235.283524 C406.636566,223.511810 409.183319,211.967041 410.931030,200.289902 C412.085785,192.574738 412.754150,184.794388 414.303131,177.122665 C414.920288,174.066177 416.261963,172.977280 419.316925,173.007355 C458.303192,173.391052 497.308350,172.032028 536.273621,173.786972 C551.016113,174.450974 563.136841,181.236313 572.518066,192.667984 C571.415955,195.013336 569.404846,195.098770 567.735168,195.542633 C546.134277,201.284912 527.092285,211.969376 510.503601,226.657227 C494.103607,241.177948 480.716156,258.119080 471.682068,278.432281 C466.087158,291.012482 458.989838,302.916840 452.825073,315.253571 C447.492188,325.925598 442.608887,336.821350 437.373169,347.543121 C429.791473,363.068909 422.032440,378.508057 414.421112,394.019501 C406.962585,409.219513 399.608337,424.470612 392.182007,439.686462 C385.343536,453.697845 378.495178,467.704468 371.604431,481.690186 C365.807770,493.455292 359.868042,505.150513 354.148193,516.952515 C351.961182,521.465027 352.757721,522.648254 357.720062,522.657288 C383.384186,522.703796 409.048492,522.647034 434.712555,522.707153 C438.203033,522.715332 439.767151,521.249573 441.267700,518.001892 C446.152557,507.429657 449.736938,496.352386 454.479065,485.717438 C460.554932,472.091492 465.471741,457.953339 471.138000,444.138489 C474.851715,435.084137 479.345398,426.347748 481.632202,416.742676 C484.627533,404.161774 480.833496,393.435120 472.613525,384.017975 C468.403961,379.195343 463.444214,375.021210 459.880188,369.926971 C461.014526,367.442749 462.852051,367.728180 464.433624,367.704010 C492.589264,367.273804 520.682800,365.443420 548.786316,363.898132 C573.741821,362.525940 598.721863,362.186371 623.693054,361.421539 C655.808960,360.437866 687.856567,357.596558 720.025940,357.567719 C725.262756,357.563049 729.148743,358.817413 731.458923,363.604858 C733.546265,367.930573 732.451050,375.412476 728.886902,378.899506 C714.745789,392.734436 700.484253,406.446198 686.270020,420.206482 C683.143433,423.233246 679.716187,423.594696 676.469727,420.711212 C673.610901,418.171997 668.679077,417.885223 667.870850,412.600464 z"
+              fill="none"
+              stroke="#5AC8FA"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-dasharray="350,1150"
+              opacity="0">
+            <animate attributeName="opacity"
+                     values="0;0.8"
+                     begin="1.5s"
+                     dur="1s"
+                     fill="freeze"/>
+        </path>
+
+        <!-- Flow Line Effect Layer 3: Tertiary flow path -->
+        <path class="flow-path3"
+              d="M667.870850,412.600464 C667.205811,407.826508 669.276978,404.450500 671.943726,401.355316 C673.271973,399.813690 674.843079,398.345612 674.064148,396.125397 C673.184143,393.617432 670.812744,394.107574 668.913330,394.200134 C641.148804,395.552765 613.321106,396.208710 585.646606,398.617645 C564.354858,400.470978 547.807861,411.923523 534.861328,428.899384 C528.550842,437.173920 525.567810,446.865845 521.650574,456.171875 C517.025391,467.159821 512.763916,478.301544 508.388702,489.393921 C504.078796,500.320648 499.823730,511.268982 495.663971,521.902588 C497.330994,524.326599 499.341705,523.632690 501.062683,523.690186 C525.207153,524.496521 549.349121,525.496826 573.517334,524.980347 C578.489807,524.874023 583.386108,525.853210 588.451782,525.073730 C598.108459,523.587830 607.268433,516.199524 610.022644,506.847229 C613.005432,496.718964 613.005371,496.718994 623.584229,496.701019 C636.182007,496.679626 636.275024,497.092926 631.772949,508.971405 C625.477539,525.581116 619.450928,542.296875 613.612610,559.072937 C612.018433,563.653442 609.477356,564.982361 604.790161,565.057434 C564.979004,565.695068 525.171814,566.577881 485.363708,567.405029 C476.864868,567.581604 475.700134,568.834839 472.507202,577.587341 C468.646149,588.171326 464.349426,598.597778 460.169250,609.063660 C454.074585,624.322693 447.947266,639.568787 441.774475,654.796387 C436.534088,667.723816 431.214111,680.619019 425.920807,693.525024 C421.391815,704.567444 417.096924,715.704468 412.710785,726.797913 C408.746857,736.823486 404.081299,746.625122 400.425476,756.771973 C396.260986,768.330627 390.258545,779.145081 386.983704,791.050659 C385.847992,795.179504 383.550964,797.537048 378.412445,797.479248 C351.918213,797.181091 325.418884,797.332581 298.921356,797.326233 C298.088165,797.326050 297.254913,797.320740 296.421844,797.308228 C294.853424,797.284729 293.276703,797.065735 292.849579,795.270142 C292.417969,793.455505 293.797180,792.547119 295.155212,791.850891 C299.000061,789.880005 302.884430,787.986389 306.744019,786.044128 C321.354919,778.690979 332.770569,767.647095 342.421173,754.695862 C351.556976,742.435486 356.784943,728.235596 362.101562,714.072876 C365.721649,704.429443 369.841095,694.973633 373.723724,685.428406 C379.664948,670.822083 385.488007,656.166565 391.563324,641.616333 C396.236176,630.424927 400.231171,618.971375 405.164490,607.873596 C409.191833,598.813904 412.540039,589.440979 415.906647,580.104919 C417.135010,576.698547 419.910065,573.939636 420.105927,570.029236 C418.004333,568.371094 415.571289,568.981689 413.358398,568.988831 C386.362366,569.075806 359.352875,568.774292 332.374512,569.544128 C300.881775,570.442871 269.396118,569.722778 237.910736,570.149719 C231.145966,570.241455 230.529099,569.632629 231.893158,563.040100 C234.090881,552.418701 234.015976,541.551575 235.654877,530.867432 C236.287689,526.742188 237.527573,524.198669 242.171967,524.864990 C263.900391,527.982422 278.569794,515.564392 292.733734,501.953400 C304.484985,490.660889 311.398682,476.400665 318.163391,461.899933 C325.319489,446.560333 333.341644,431.627228 340.786560,416.419159 C348.001495,401.680664 354.888184,386.781769 362.061523,372.022552 C367.437500,360.961334 373.106750,350.042999 378.523132,339.001068 C384.743927,326.319305 390.764709,313.539337 396.996887,300.863251 C401.247864,292.216919 405.791962,283.714905 410.060425,275.076904 C415.047333,264.984985 419.866882,254.810455 424.780579,244.682205 C426.465057,241.210175 425.122650,239.551865 421.565887,239.556610 C417.574066,239.561920 413.582977,239.864578 409.590881,240.020309 C406.275238,240.149673 404.962341,239.121857 405.373993,235.283524 C406.636566,223.511810 409.183319,211.967041 410.931030,200.289902 C412.085785,192.574738 412.754150,184.794388 414.303131,177.122665 C414.920288,174.066177 416.261963,172.977280 419.316925,173.007355 C458.303192,173.391052 497.308350,172.032028 536.273621,173.786972 C551.016113,174.450974 563.136841,181.236313 572.518066,192.667984 C571.415955,195.013336 569.404846,195.098770 567.735168,195.542633 C546.134277,201.284912 527.092285,211.969376 510.503601,226.657227 C494.103607,241.177948 480.716156,258.119080 471.682068,278.432281 C466.087158,291.012482 458.989838,302.916840 452.825073,315.253571 C447.492188,325.925598 442.608887,336.821350 437.373169,347.543121 C429.791473,363.068909 422.032440,378.508057 414.421112,394.019501 C406.962585,409.219513 399.608337,424.470612 392.182007,439.686462 C385.343536,453.697845 378.495178,467.704468 371.604431,481.690186 C365.807770,493.455292 359.868042,505.150513 354.148193,516.952515 C351.961182,521.465027 352.757721,522.648254 357.720062,522.657288 C383.384186,522.703796 409.048492,522.647034 434.712555,522.707153 C438.203033,522.715332 439.767151,521.249573 441.267700,518.001892 C446.152557,507.429657 449.736938,496.352386 454.479065,485.717438 C460.554932,472.091492 465.471741,457.953339 471.138000,444.138489 C474.851715,435.084137 479.345398,426.347748 481.632202,416.742676 C484.627533,404.161774 480.833496,393.435120 472.613525,384.017975 C468.403961,379.195343 463.444214,375.021210 459.880188,369.926971 C461.014526,367.442749 462.852051,367.728180 464.433624,367.704010 C492.589264,367.273804 520.682800,365.443420 548.786316,363.898132 C573.741821,362.525940 598.721863,362.186371 623.693054,361.421539 C655.808960,360.437866 687.856567,357.596558 720.025940,357.567719 C725.262756,357.563049 729.148743,358.817413 731.458923,363.604858 C733.546265,367.930573 732.451050,375.412476 728.886902,378.899506 C714.745789,392.734436 700.484253,406.446198 686.270020,420.206482 C683.143433,423.233246 679.716187,423.594696 676.469727,420.711212 C673.610901,418.171997 668.679077,417.885223 667.870850,412.600464 z"
+              fill="none"
+              stroke="#64D2FF"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-dasharray="100,1400"
+              opacity="0">
+            <animate attributeName="opacity"
+                     values="0;0.6"
+                     begin="2s"
+                     dur="1s"
+                     fill="freeze"/>
+        </path>
+    </g>
+</svg>
