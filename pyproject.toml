@@ -88,10 +88,10 @@ dependencies = [
 
 # Project URLs
 [project.urls]
-Homepage = "https://leviftas-studio.github.io/Leviftas/"
-Documentation = "https://github.com/Leviftas-Studio/Leviftas/wiki"
-Repository = "https://github.com/Leviftas-Studio/Leviftas"
-Issues = "https://github.com/Leviftas-Studio/Leviftas/issues"
+Homepage = "https://frost-leo.github.io/Leviftas/"
+Documentation = "https://github.com/Frost-Leo/Leviftas/wiki"
+Repository = "https://github.com/Frost-Leo/Leviftas"
+Issues = "https://github.com/Frost-Leo/Leviftas/issues"
 
 # Setuptools-specific configuration
 [tool.setuptools]
