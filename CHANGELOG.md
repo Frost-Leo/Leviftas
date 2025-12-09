@@ -19,7 +19,7 @@
 
   - Author   : FrostLeo <frostleo.dev@gmail.com>
   - Created  : 2025/10/31
-  - Modified : 2025/12/5
+  - Modified : 2025/12/9
 -->
 
 # ChangeLog
@@ -30,6 +30,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### [#3](https://github.com/Frost-Leo/Leviftas/issues/3) - Internal BaseModel foundation
+
+- test: Add InternalBaseModel test suite ([1dd6798](https://github.com/Frost-Leo/Leviftas/commit/1dd6798))
+- feat: Add internal base model with Meta support ([771dffd](https://github.com/Frost-Leo/Leviftas/commit/771dffd))
+- build: Add pydantic and typing_extensions dependencies ([830f120](https://github.com/Frost-Leo/Leviftas/commit/830f120))
 
 ### [#1](https://github.com/Frost-Leo/Leviftas/issues/1) - Python package infrastructure setup
 
