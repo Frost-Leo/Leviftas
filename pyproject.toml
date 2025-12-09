@@ -22,7 +22,7 @@
 #
 # - Author   : FrostLeo <frostleo.dev@gmail.com>
 # - Created  : 2025/12/5
-# - Modified : 2025/12/5
+# - Modified : 2025/12/9
 
 # Build system configuration - declares build backend and dependencies
 [build-system]
@@ -75,6 +75,8 @@ classifiers = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "pydantic>=2.12.3",
+    "typing_extensions>=4.15.0",
 ]
 
 # Executable scripts - command-line tools installed with the package
