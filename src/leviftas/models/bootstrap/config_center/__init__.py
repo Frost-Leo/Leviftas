@@ -15,19 +15,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-__init__.py
+config_center/__init__.py
 
-Leviftas base models package.
+Configuration center connection models package for bootstrap phase.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
-- Created  : 2025/12/9 
-- Modified : 2025/12/9
+- Created  : 2025/12/19
+- Modified : 2025/12/19
 """
 
-from leviftas.models.base.internal_base_model import InternalBaseModel
-from leviftas.models.base.internal_base_settings import InternalBaseSettings
+from leviftas.models.bootstrap.config_center.base import ConfigCenterBaseModel
+from leviftas.models.bootstrap.config_center.nacos_conn_config_model import (
+    NacosConnConfigModel,
+)
 
 __all__ = [
-    "InternalBaseModel",
-    "InternalBaseSettings",
+    "ConfigCenterBaseModel",
+    "NacosConnConfigModel",
 ]
