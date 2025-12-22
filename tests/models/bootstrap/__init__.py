@@ -17,17 +17,10 @@ limitations under the License.
 
 __init__.py
 
-Leviftas base models package.
+Bootstrap models test package.
 
 - Author   : FrostLeo <frostleo.dev@gmail.com>
-- Created  : 2025/12/9 
-- Modified : 2025/12/9
+- Created  : 2025/12/22
+- Modified : 2025/12/22
 """
 
-from leviftas.models.base.internal_base_model import InternalBaseModel
-from leviftas.models.base.internal_base_settings import InternalBaseSettings
-
-__all__ = [
-    "InternalBaseModel",
-    "InternalBaseSettings",
-]

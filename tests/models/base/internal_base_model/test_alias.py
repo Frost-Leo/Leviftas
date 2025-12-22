@@ -201,3 +201,4 @@ class TestAliasInNestedModels:
         assert "innerValue" in data["nested"]
         logger.info("Nested serialization uses original names")
 
+

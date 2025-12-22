@@ -228,3 +228,4 @@ class TestNestedSerialization:
         assert data["items"][1]["price"] == 200
         logger.info("List of nested models serialized correctly")
 
+
