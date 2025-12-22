@@ -31,6 +31,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### [#5](https://github.com/Frost-Leo/Leviftas/issues/5) - Bootstrap configuration model
+
+- test: Add comprehensive test suite for bootstrap settings models ([15734f3](https://github.com/Frost-Leo/Leviftas/commit/15734f3))
+- refactor: Improve bootstrap settings inheritance and type safety ([683b2fa](https://github.com/Frost-Leo/Leviftas/commit/683b2fa))
+- build: Add platformdirs dependency ([4b2bd18](https://github.com/Frost-Leo/Leviftas/commit/4b2bd18))
+- feat: Add bootstrap configuration model with config center support ([a7ee9de](https://github.com/Frost-Leo/Leviftas/commit/a7ee9de))
+- build: Add pydantic-settings dependency ([132c83c](https://github.com/Frost-Leo/Leviftas/commit/132c83c))
+
 ### [#3](https://github.com/Frost-Leo/Leviftas/issues/3) - Internal BaseModel foundation
 
 - test: Add InternalBaseModel test suite ([1dd6798](https://github.com/Frost-Leo/Leviftas/commit/1dd6798))
