@@ -162,3 +162,4 @@ class TestEnumValidation:
         assert model.status == "inactive"
         logger.info("Enum assignment correctly stored value")
 
+

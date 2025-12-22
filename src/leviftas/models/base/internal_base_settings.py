@@ -51,6 +51,8 @@ class InternalBaseSettings(BaseSettings):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
+        # Environment variable prefix for all settings.
+        env_prefix="LEVIFTAS_",
         # Case insensitive by default.
         case_sensitive=False,
         # Load configuration from .env file in the current working directory.
@@ -61,14 +63,16 @@ class InternalBaseSettings(BaseSettings):
         env_ignore_empty=True,
         # Parse "null" string as None value.
         env_parse_none_str="null",
-        # Enable CLI argument parsing from sys.argv.
-        cli_parse_args=True,
+        # Use double underscore as nested delimiter for environment variables.
+        env_nested_delimiter="__",
+        # Disable CLI argument parsing by default, subclasses can enable if needed.
+        cli_parse_args=False,
         # Parse "null" string as None value in CLI arguments.
         cli_parse_none_str="null",
         # Enable implicit flags: --debug equals --debug=true, --no-debug equals --debug=false.
         cli_implicit_flags=True,
         # Use kebab-case for CLI arguments: --node-id instead of --node_id.
         cli_kebab_case=True,
-        # Load secrets from Docker/Kubernetes secrets directory.
-        secrets_dir="/run/secrets",
+        # Disable secrets directory by default for cross-platform support.
+        secrets_dir=None,
     )

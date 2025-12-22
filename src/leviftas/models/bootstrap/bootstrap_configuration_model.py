@@ -30,18 +30,14 @@ CLI arguments, and .env files.
 import platform
 import socket
 import uuid
-from typing import Literal, Optional
 
 from platformdirs import user_config_dir
 from pydantic import Field, model_validator
 from pydantic_settings import SettingsConfigDict
-from typing_extensions import ClassVar, Self
+from typing_extensions import ClassVar, Literal, Self
 
 from leviftas.models.base.internal_base_settings import InternalBaseSettings
 from leviftas.models.bootstrap.config_center import ConfigCenterBaseModel
-
-# Import to trigger registration
-from leviftas.models.bootstrap.config_center import NacosConnConfigModel as _  # noqa: F401
 
 
 class BootstrapConfigurationModel(InternalBaseSettings):
@@ -66,29 +62,13 @@ class BootstrapConfigurationModel(InternalBaseSettings):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
-        # Case insensitive by default.
-        case_sensitive=False,
-        # Use LEVIFTAS_ as environment variable prefix.
-        env_prefix="LEVIFTAS_",
-        # Load configuration from .env file in the current working directory.
-        env_file=".env",
-        # Use UTF-8 encoding for .env file to avoid cross-platform issues.
-        env_file_encoding="utf-8",
-        # Ignore empty environment variables, use default values instead.
-        env_ignore_empty=True,
-        # Parse "null" string as None value.
-        env_parse_none_str="null",
+        # Inherit all settings from parent class.
+        **InternalBaseSettings.model_config,
         # Program name displayed in CLI help message.
         cli_prog_name="leviftas",
-        # Enable CLI argument parsing from sys.argv.
+        # Enable CLI argument parsing as this is the entry point.
         cli_parse_args=True,
-        # Parse "null" string as None value in CLI arguments.
-        cli_parse_none_str="null",
-        # Enable implicit flags: --debug equals --debug=true, --no-debug equals --debug=false.
-        cli_implicit_flags=True,
-        # Use kebab-case for CLI arguments: --node-id instead of --node_id.
-        cli_kebab_case=True,
-        # Load secrets from Docker/Kubernetes secrets directory.
+        # Load secrets from Docker/Kubernetes secrets directory (Linux/container).
         secrets_dir="/run/secrets",
     )
 
@@ -145,13 +125,13 @@ class BootstrapConfigurationModel(InternalBaseSettings):
     )
     """Configuration source, defaults to remote (config center)."""
 
-    config_center_type: Optional[str] = Field(
+    config_center_type: str | None = Field(
         default=None,
         description="Configuration center type (e.g., 'nacos', 'apollo').",
     )
     """Configuration center type, required when config_source is 'remote'."""
 
-    config_center: Optional[ConfigCenterBaseModel] = Field(
+    config_center: ConfigCenterBaseModel | None = Field(
         default=None,
         description="Configuration center connection settings, auto-loaded by type.",
     )

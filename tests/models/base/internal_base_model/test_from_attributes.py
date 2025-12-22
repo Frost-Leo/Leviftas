@@ -184,3 +184,4 @@ class TestFromAttributesValidation:
         assert model.name == "spaced name"
         logger.info("Validation (whitespace strip) correctly applied")
 
+

@@ -25,7 +25,8 @@ pattern for auto-discovery and instantiation of configuration center models.
 - Modified : 2025/12/19
 """
 
-from typing_extensions import Any, ClassVar, Self
+from pydantic_settings import SettingsConfigDict
+from typing_extensions import Any, ClassVar
 
 from leviftas.models.base.internal_base_settings import InternalBaseSettings
 
@@ -42,6 +43,13 @@ class ConfigCenterBaseModel(InternalBaseSettings):
             Central registry for all configuration center models.
             Maps type names to their corresponding model classes.
     """
+
+    model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
+        # Inherit all settings from parent class.
+        **InternalBaseSettings.model_config,
+        # Clear env_prefix to let subclasses define their own.
+        env_prefix="",
+    )
 
     registry: ClassVar[dict[str, type["ConfigCenterBaseModel"]]] = {}
 
@@ -71,10 +79,16 @@ class ConfigCenterBaseModel(InternalBaseSettings):
 
         type_name = getattr(cls.Meta, "type_name", "")
         if type_name:
+            if type_name in ConfigCenterBaseModel.registry:
+                existing_cls = ConfigCenterBaseModel.registry[type_name]
+                raise ValueError(
+                    f"Duplicate config center type_name '{type_name}': "
+                    f"{cls.__name__} conflicts with {existing_cls.__name__}"
+                )
             ConfigCenterBaseModel.registry[type_name] = cls
 
     @classmethod
-    def get_by_type(cls, type_name: str) -> Self:
+    def get_by_type(cls, type_name: str) -> "ConfigCenterBaseModel":
         """
         Get and instantiate a configuration center model by type name.
 

@@ -25,9 +25,7 @@ Full Nacos client configuration should be defined in the Nacos module.
 - Modified : 2025/12/19
 """
 
-from typing import Optional
-
-from pydantic import Field
+from pydantic import Field, SecretStr
 from pydantic_settings import SettingsConfigDict
 from typing_extensions import ClassVar
 
@@ -44,8 +42,10 @@ class NacosConnConfigModel(ConfigCenterBaseModel):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
+        # Inherit all settings from parent class.
+        **ConfigCenterBaseModel.model_config,
+        # Use NACOS_ prefix for environment variables.
         env_prefix="NACOS_",
-        cli_prog_name="nacos",
     )
 
     class Meta:
@@ -65,25 +65,25 @@ class NacosConnConfigModel(ConfigCenterBaseModel):
     )
     """Nacos namespace ID, defaults to public namespace."""
 
-    username: Optional[str] = Field(
+    username: str | None = Field(
         default=None,
         description="Nacos authentication username.",
     )
     """Nacos username for authentication."""
 
-    password: Optional[str] = Field(
+    password: SecretStr | None = Field(
         default=None,
         description="Nacos authentication password.",
     )
     """Nacos password for authentication."""
 
-    access_key: Optional[str] = Field(
+    access_key: SecretStr | None = Field(
         default=None,
         description="Alibaba Cloud access key ID for ACM mode.",
     )
     """Alibaba Cloud access key for ACM authentication."""
 
-    secret_key: Optional[str] = Field(
+    secret_key: SecretStr | None = Field(
         default=None,
         description="Alibaba Cloud secret key for ACM mode.",
     )
