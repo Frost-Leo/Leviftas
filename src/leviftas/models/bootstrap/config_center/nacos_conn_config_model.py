@@ -42,10 +42,8 @@ class NacosConnConfigModel(ConfigCenterBaseModel):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
-        # Inherit all settings from parent class.
-        **ConfigCenterBaseModel.model_config,
-        # Use NACOS_ prefix for environment variables.
-        env_prefix="NACOS_",
+        # Inherit all settings from parent class, override env_prefix.
+        **{**ConfigCenterBaseModel.model_config, "env_prefix": "NACOS_"},
     )
 
     class Meta:

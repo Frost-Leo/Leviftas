@@ -62,14 +62,16 @@ class BootstrapConfigurationModel(InternalBaseSettings):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
-        # Inherit all settings from parent class.
-        **InternalBaseSettings.model_config,
-        # Program name displayed in CLI help message.
-        cli_prog_name="leviftas",
-        # Enable CLI argument parsing as this is the entry point.
-        cli_parse_args=True,
-        # Load secrets from Docker/Kubernetes secrets directory (Linux/container).
-        secrets_dir="/run/secrets",
+        # Inherit all settings from parent class, override specific values.
+        **{
+            **InternalBaseSettings.model_config,
+            # Program name displayed in CLI help message.
+            "cli_prog_name": "leviftas",
+            # Enable CLI argument parsing as this is the entry point.
+            "cli_parse_args": True,
+            # Load secrets from Docker/Kubernetes secrets directory (Linux/container).
+            "secrets_dir": "/run/secrets",
+        },
     )
 
     hostname: str = Field(

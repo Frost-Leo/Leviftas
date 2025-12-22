@@ -45,10 +45,8 @@ class ConfigCenterBaseModel(InternalBaseSettings):
     """
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
-        # Inherit all settings from parent class.
-        **InternalBaseSettings.model_config,
-        # Clear env_prefix to let subclasses define their own.
-        env_prefix="",
+        # Inherit all settings from parent class, override env_prefix.
+        **{**InternalBaseSettings.model_config, "env_prefix": ""},
     )
 
     registry: ClassVar[dict[str, type["ConfigCenterBaseModel"]]] = {}
